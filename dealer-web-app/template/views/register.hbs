@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {{>header}}
+    <title>Connect Kissan | Register</title>
+  </head>
+  <body>
+    {{>navbar}}
+    <section class="main-content">
+      {{>search}}
+      <!--Sign Up-->
+      <div class="authenticate-box sign-up">
+        <h3>Signup</h3>
+        <form action="/register" method="post">
+          <input type="text" placeholder="Full Name.." name="name" required />
+          <input type="text" placeholder="Enter Dealership.." name="dealer" required />
+          <input
+            type="email"
+            placeholder="Enter your Email.."
+            name="email"
+            required
+          />
+          <input
+            type="password"
+            placeholder="Enter your Password.."
+            name="password"
+            required
+          />
+          <button type="submit">Sign Up</button>
+          <small
+            >Already a User? <br />
+              <a href="/login">Login Here</a>
+          </small>
+        </form>
+      </div>
+    </section>
+  </body>
+</html>

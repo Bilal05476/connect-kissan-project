@@ -5,3 +5,10 @@ labelId.addEventListener("click", () => {
   smallNav.classList.toggle("show");
   labelId.classList.toggle("show");
 });
+
+fetchWeather: function foo() {
+  fetch(
+    "api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}"
+  ),
+    then((res) => res.json);
+}

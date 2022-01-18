@@ -280,6 +280,9 @@ body {
 }
 
 @media (max-width: 782px) {
+  .navbar-menu {
+    display: none;
+  }
   .small-nav-icon {
     display: block;
     margin-left: auto;

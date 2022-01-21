@@ -32,7 +32,8 @@ body {
   border-radius: 10px;
   border: 1px solid var(--orangeColor--);
 }
-.admin-content a:hover {
+.admin-content a:hover,
+.admin-content a:active {
   background-color: rgba(255, 255, 255, 0.87);
   color: var(--orangeColor--);
 }
@@ -164,7 +165,7 @@ body {
 .find-weather button {
   padding: 1rem;
   cursor: pointer;
-  color: #000000d7;
+  color: #fff;
   background-color: var(--orangeColor--);
   border: none;
   font-size: 1rem;
@@ -180,6 +181,7 @@ body {
   background-color: var(--orangeColor--);
   border-radius: 5px;
   padding: 0.4rem;
+  margin-bottom: 1rem;
 }
 @media (max-width: 782px) {
   .navbar-menu {

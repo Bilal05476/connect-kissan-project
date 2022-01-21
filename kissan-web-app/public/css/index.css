@@ -135,7 +135,52 @@ body {
 .navbar-checked {
   display: none;
 }
-
+.weather {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+}
+.weather-section {
+  margin-top: 4rem;
+  padding: 2rem;
+  background-color: #000000a4;
+  backdrop-filter: blur(10px);
+  border-radius: 5px;
+}
+.find-weather input {
+  background-color: #000000a4;
+  outline: none !important;
+  backdrop-filter: blur(10px);
+  border-radius: 5px;
+  color: #fff;
+  text-align: center;
+  border: 0px;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+.find-weather button {
+  padding: 1rem;
+  cursor: pointer;
+  color: #000000d7;
+  background-color: var(--orangeColor--);
+  border: none;
+  font-size: 1rem;
+  outline: none !important;
+  border-radius: 5px;
+}
+.weather-section h3 {
+  font-size: 4rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+.weather-section p {
+  background-color: var(--orangeColor--);
+  border-radius: 5px;
+  padding: 0.4rem;
+}
 @media (max-width: 782px) {
   .navbar-menu {
     display: none;

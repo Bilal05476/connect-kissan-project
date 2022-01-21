@@ -6,9 +6,16 @@ labelId.addEventListener("click", () => {
   labelId.classList.toggle("show");
 });
 
-fetchWeather: function foo() {
-  fetch(
-    "api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}"
-  ),
-    then((res) => res.json);
-}
+//Weather Fetching
+let cityName = "karachi";
+let cityGetBtn = document.getElementById("weather-get");
+let weatherField = document.getElementById("weatherField");
+const api_Key = "xxxxxxxxxxxx";
+
+cityGetBtn.addEventListener("click", async () => {
+  cityName = weatherField.value;
+  const data = await fetch(
+    `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${api_Key}`
+  );
+  console.log(data.body);
+});

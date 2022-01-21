@@ -6,7 +6,17 @@
   </head>
   <body>
     {{>navbar}}
-    <h2>Weather</h2>
+    <div class="weather">
+      <div class="weather-section">
+        <div class="find-weather">
+        <input id="weatherField" name="weather-input" type="text" placeholder="Enter your city..">
+        <button id="weather-get" type="submit">Search</button>
+        </div>
+        <h3> <span class="weather-degree">22</span> &deg;C</h3>
+        <p>Karachi</p>
+        <small>Cloudy</small>
+      </div>
+    </div>
     <script src="js/script.js"></script>
   </body>
 </html>

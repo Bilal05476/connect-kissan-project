@@ -47,26 +47,70 @@ mongoose
 
 const port = process.env.PORT || 8080;
 
+//Clear data from localStorage
+
 // set different routes for different pages
 app.get("/", (req, res) => {
-  res.render("index");
+  const _token = localStorage.getItem("token");
+  if (!_token) {
+    res.render("index");
+  } else {
+    res.redirect("dashboard");
+  }
+});
+app.get("/about", (req, res) => {
+  res.render("about");
 });
 app.get("/register", (req, res) => {
-  res.render("register");
+  const _token = localStorage.getItem("token");
+  if (!_token) {
+    const _error = localStorage.getItem("errorMessage");
+    res.render("register", {
+      error: {
+        message: _error,
+      },
+    });
+  } else {
+    res.redirect("dashboard");
+  }
 });
 app.get("/login", (req, res) => {
-  res.render("login");
+  const _token = localStorage.getItem("token");
+  if (!_token) {
+    const _error = localStorage.getItem("errorMessage");
+    res.render("login", {
+      error: {
+        message: _error,
+      },
+    });
+  } else {
+    res.redirect("dashboard");
+  }
 });
 app.get("/dashboard", (req, res) => {
   const _token = localStorage.getItem("token");
+  const _userName = localStorage.getItem("userName");
+  const _userEmail = localStorage.getItem("userEmail");
+  const _userDealer = localStorage.getItem("userDealer");
   if (!_token) {
-    res.render("login");
+    res.redirect("login");
   } else {
-    res.render("dashboard");
+    res.render("dashboard", {
+      user: {
+        userName: _userName,
+        userEmail: _userEmail,
+        userDealer: _userDealer,
+      },
+    });
   }
 });
 app.get("/contact", (req, res) => {
   res.render("contact");
+});
+
+app.get("/logout", (req, res) => {
+  localStorage.clear();
+  res.render("logout");
 });
 
 // Create New User Into Database
@@ -99,10 +143,14 @@ app.post("/register", async (req, res) => {
       await user.save();
       //Setting localStorage Item
       localStorage.setItem("token", token);
+      localStorage.setItem("userName", user.name);
+      localStorage.setItem("userEmail", user.email);
+      localStorage.setItem("userDealer", user.dealer);
       res.status(201).redirect("/dashboard");
     }
   } catch (err) {
-    res.status(409).json({ message: err.message });
+    localStorage.setItem("error", err.message);
+    res.render("register");
   }
 });
 
@@ -114,6 +162,7 @@ app.post("/login", async (req, res) => {
   try {
     // Validate if user exist in our database
     const user = await User.findOne({ email });
+
     if (user && (await bcrypt.compare(password, user.password))) {
       // Create token
       const token = jwt.sign({ user_id: user._id, email }, TOKEN_KEY, {
@@ -122,11 +171,14 @@ app.post("/login", async (req, res) => {
       user.token = token;
       //Setting localStorage Item
       localStorage.setItem("token", token);
-
+      localStorage.setItem("userName", user.name);
+      localStorage.setItem("userEmail", user.email);
+      localStorage.setItem("userDealer", user.dealer);
       res.status(201).redirect("/dashboard");
     }
   } catch (err) {
-    res.status(409).json({ message: err.message });
+    localStorage.setItem("error", err.message);
+    res.render("login");
   }
 });
 
@@ -145,7 +197,7 @@ app.post("/contact", async (req, res) => {
     await userContact.save();
     res.status(201).redirect("/contact");
   } catch (err) {
-    res.status(409).json({ message: err.message });
+    res.render("contact");
   }
 });
 

@@ -6,8 +6,33 @@
 </head>
 <body>
     {{>navbar}}
-   <h1>Dashboard</h1>
-<script src="js/script.js"></script>
+    <div class="dashboard">
+    <div class="left-board">
+        <h4>
+            Your Name: <strong>{{user.userName}}</strong>
+        </h4>
+        <h4>
+            Your Email: <strong>{{user.userEmail}}</strong>
+        </h4>
+        <h4>
+            Your DealerShip: <strong>{{user.userDealer}}</strong>
+        </h4>
+        <form class="item-form">
+            <h2>Enter your Item</h2>
+            <input name="itemName" type="text" placeholder="Item name.." required />
+            <textarea name="itemDetails" rows="4" type="text" placeholder="Item description" required ></textarea>
+            <input name="itemType" type="text" placeholder="Item type" required />
+            <input name="itemPrice" type="text" placeholder="Item price" required />
+            <button class="add-item" type="submit">Add Item</button>
+        </form>
+        <small>or</small>
+        <a class="logout" href="/logout">Logout</a>
+    </div>
 
+    <div class="right-board">
+        <h2>Your Items:</h2>
+    </div>
+    </div>
+    <script src="js/script.js"></script>
 </body>
 </html>

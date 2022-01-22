@@ -183,6 +183,9 @@ body {
   padding: 0.4rem;
   margin-bottom: 1rem;
 }
+.weather-section .weather-icon{
+  font-family: "font awesome";
+}
 @media (max-width: 782px) {
   .navbar-menu {
     display: none;

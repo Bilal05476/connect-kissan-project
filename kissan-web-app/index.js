@@ -1,4 +1,3 @@
-
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
@@ -27,7 +26,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // DB Config
 const db = config.get("mongoURI");
-
 
 //Connect to Mongo
 mongoose
@@ -95,5 +93,5 @@ app.post("/contact", async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server running on port: ${port}`);
+  console.log(`Server running on port: http://localhost:${port}`);
 });

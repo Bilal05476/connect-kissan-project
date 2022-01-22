@@ -12,3 +12,9 @@ labelId.addEventListener("click", () => {
   smallNav.classList.toggle("show");
   labelId.classList.toggle("show");
 });
+
+// localStorage
+// if (window.localStorage.length() > 0) {
+//   var logoutMenu = document.querySelector(".logout");
+//   logoutMenu.innerHTML = "Logout";
+// }

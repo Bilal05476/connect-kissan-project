@@ -5,7 +5,8 @@ import config from "config";
 import path from "path";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import auth from "./middleware/auth.js";
+import { LocalStorage } from "node-localstorage";
+var localStorage = new LocalStorage("./scratch");
 
 import User from "./models/authSchema.js";
 import Contact from "./models/contactSchema.js";
@@ -56,10 +57,14 @@ app.get("/register", (req, res) => {
 app.get("/login", (req, res) => {
   res.render("login");
 });
-app.get("/dashboard", auth, (req, res) => {
-  res.render("dashboard");
+app.get("/dashboard", (req, res) => {
+  const _token = localStorage.getItem("token");
+  if (!_token) {
+    res.render("login");
+  } else {
+    res.render("dashboard");
+  }
 });
-
 app.get("/contact", (req, res) => {
   res.render("contact");
 });
@@ -92,6 +97,8 @@ app.post("/register", async (req, res) => {
       // save user token
       user.token = token;
       await user.save();
+      //Setting localStorage Item
+      localStorage.setItem("token", token);
       res.status(201).redirect("/dashboard");
     }
   } catch (err) {
@@ -100,6 +107,7 @@ app.post("/register", async (req, res) => {
 });
 
 // Login User With Database
+
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -112,7 +120,9 @@ app.post("/login", async (req, res) => {
         expiresIn: "240h",
       });
       user.token = token;
-      res.json({ accessToken: token });
+      //Setting localStorage Item
+      localStorage.setItem("token", token);
+
       res.status(201).redirect("/dashboard");
     }
   } catch (err) {
@@ -140,5 +150,5 @@ app.post("/contact", async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server running on port: ${port}`);
+  console.log(`Server running on port: http://localhost:${port}`);
 });

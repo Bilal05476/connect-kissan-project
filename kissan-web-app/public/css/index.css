@@ -183,8 +183,10 @@ body {
   padding: 0.4rem;
   margin-bottom: 1rem;
 }
-.weather-section .weather-icon{
-  font-family: "font awesome";
+.weather-section #weather-icon {
+  font-size: 2rem;
+  margin-right: 0.5rem;
+  margin-top: 0.5rem;
 }
 @media (max-width: 782px) {
   .navbar-menu {
@@ -218,10 +220,16 @@ body {
   .small-nav-drawer a,
   .dropdown.small a {
     color: #fff;
-    text-align: center;
     text-decoration: none;
     margin: 10px;
     padding: 10px;
+  }
+  .dropdown.small {
+    width: 100%;
+    margin: 10px;
+    margin-left: 0;
+    padding: 10px;
+    padding-left: 0;
   }
   .small-nav-drawer a {
     font-size: 0.9rem;

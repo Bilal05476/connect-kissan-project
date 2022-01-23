@@ -6,6 +6,15 @@ labelId.addEventListener("click", () => {
   labelId.classList.toggle("show");
 });
 
+// small screen dropdown
+var servicesMenu = document.getElementById("services-menu-id");
+var dropdownContent = document.getElementById("dropdown-small");
+var servicesIcon = document.getElementById("services-icon-id");
+servicesMenu.addEventListener("click", () => {
+  dropdownContent.classList.toggle("show");
+  servicesIcon.classList.toggle("fa-caret-up");
+});
+
 //Weather Fetching
 
 // set variables for weather data
@@ -19,7 +28,7 @@ let cityForcast = document.querySelector(".city-forcast");
 let weatherIcon = document.getElementById("weather-icon");
 
 // api-key for data fetching
-const api_Key = "4b36a8c51a0c99c38c1cfff230b8d126";
+const api_Key = "4b36a8c5";
 
 // function call on event listener
 cityGetBtn.addEventListener("click", async () => {
@@ -37,25 +46,46 @@ cityGetBtn.addEventListener("click", async () => {
   const weatherFor = weather.map((item) => item.main);
   cityForcast.innerHTML = weatherFor;
 
-  if (weatherFor == "Dust") {
+  if (
+    weatherFor == "Dust" ||
+    weatherFor == "Mist" ||
+    weatherFor == "Haze" ||
+    weatherFor == "Smoke"
+  ) {
     weatherIcon.classList.add("fa-smog");
     weatherIcon.classList.remove("fa-cloud-showers-heavy");
     weatherIcon.classList.remove("fa-cloud");
     weatherIcon.classList.remove("fa-moon");
+    weatherIcon.classList.remove("fa-snowflake");
   } else if (weatherFor == "Rain" || weatherFor == "Thunderstorm") {
     weatherIcon.classList.add("fa-cloud-showers-heavy");
     weatherIcon.classList.remove("fa-smog");
     weatherIcon.classList.remove("fa-cloud");
     weatherIcon.classList.remove("fa-moon");
+    weatherIcon.classList.remove("fa-snowflake");
   } else if (weatherFor == "Clouds") {
     weatherIcon.classList.add("fa-cloud");
     weatherIcon.classList.remove("fa-smog");
     weatherIcon.classList.remove("fa-cloud-showers-heavy");
     weatherIcon.classList.remove("fa-moon");
+    weatherIcon.classList.remove("fa-snowflake");
   } else if (weatherFor == "Clear") {
     weatherIcon.classList.add("fa-moon");
     weatherIcon.classList.remove("fa-smog");
     weatherIcon.classList.remove("fa-cloud-showers-heavy");
     weatherIcon.classList.remove("fa-cloud");
+    weatherIcon.classList.remove("fa-snowflake");
+  } else if (weatherFor == "Snow") {
+    weatherIcon.classList.add("fa-snowflake");
+    weatherIcon.classList.remove("fa-moon");
+    weatherIcon.classList.remove("fa-smog");
+    weatherIcon.classList.remove("fa-cloud-showers-heavy");
+    weatherIcon.classList.remove("fa-cloud");
+  } else {
+    weatherIcon.classList.add("fa-moon");
+    weatherIcon.classList.remove("fa-smog");
+    weatherIcon.classList.remove("fa-cloud-showers-heavy");
+    weatherIcon.classList.remove("fa-cloud");
+    weatherIcon.classList.remove("fa-snowflake");
   }
 });

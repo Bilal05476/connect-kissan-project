@@ -9,7 +9,7 @@
 }
 .dashboard .left-board {
   padding: 2rem;
-  width: 30%;
+  width: 40%;
 }
 .dashboard .left-board h4 {
   font-weight: 300;
@@ -41,7 +41,7 @@
   color: #fff;
   display: block;
   margin: 2rem auto;
-  margin-bottom: 3rem;
+  /* margin-bottom: 3rem; */
 }
 .dashboard .left-board .item-form .add-item,
 .logout {
@@ -58,8 +58,33 @@
 .logout {
   text-decoration: none;
   background-color: crimson;
+  width: 100%;
+  text-align: center;
 }
 .dashboard .right-board {
   background-color: var(--orangeColor--);
   padding: 2rem;
+  width: 40%;
+}
+.logout-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 782px) {
+  .dashboard {
+    flex-direction: column;
+  }
+  .dashboard .left-board {
+    padding: 2rem;
+    padding-left: 0rem;
+    padding-right: 0rem;
+    width: 80%;
+    margin-bottom: 2rem;
+  }
+  .dashboard .right-board {
+    width: 80%;
+    margin-bottom: 2rem;
+  }
 }

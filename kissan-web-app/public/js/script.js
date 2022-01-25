@@ -18,7 +18,7 @@ servicesMenu.addEventListener("click", () => {
 //Weather Fetching
 
 // set variables for weather data
-let city = "karachi";
+let city = "";
 let cityGetBtn = document.getElementById("weather-get");
 let weatherField = document.getElementById("weatherField");
 let weatherDegree = document.querySelector(".weather-degree");
@@ -28,7 +28,7 @@ let cityForcast = document.querySelector(".city-forcast");
 let weatherIcon = document.getElementById("weather-icon");
 
 // api-key for data fetching
-const api_Key = "4b36a8c5";
+const api_Key = "4b36a8c51a0c99c38c1cfff230b8d126";
 
 // function call on event listener
 cityGetBtn.addEventListener("click", async () => {

@@ -47,8 +47,6 @@ mongoose
 
 const port = process.env.PORT || 8080;
 
-//Clear data from localStorage
-
 // set different routes for different pages
 app.get("/", (req, res) => {
   const _token = localStorage.getItem("token");
@@ -138,6 +136,7 @@ app.post("/register", async (req, res) => {
       const token = jwt.sign({ user_id: user._id, email }, TOKEN_KEY, {
         expiresIn: "240h",
       });
+      
       // save user token
       user.token = token;
       await user.save();

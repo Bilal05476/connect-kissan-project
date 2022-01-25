@@ -1,9 +1,5 @@
 import mongoose from "mongoose";
 
-// const loginSchema = mongoose.Schema({
-//   email: String,
-//   password: String,
-// });
 const userSchema = mongoose.Schema({
   name: String,
   dealer: String,
@@ -12,7 +8,6 @@ const userSchema = mongoose.Schema({
   token: String,
 });
 
-// var Login = mongoose.model("Login", loginSchema);
 var User = mongoose.model("User", userSchema);
 
 export default User;

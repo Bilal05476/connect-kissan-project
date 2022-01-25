@@ -87,7 +87,8 @@ app.post("/contact", async (req, res) => {
   try {
     await userContact.save();
     res.status(201).redirect("/contact");
-  } catch (err) {
+  } 
+  catch (err) {
     res.status(409).json({ message: err.message });
   }
 });

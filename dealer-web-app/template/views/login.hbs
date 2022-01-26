@@ -20,11 +20,15 @@
           />
           <input
             type="password"
-            id="passInputLand"
+            id="passInput"
             placeholder="Enter your Password.."
             name="password"
             required
           />
+          <div style="text-align:center; color: #fff;">
+            <i class="showPass fa fa-eye"  onclick="showPassword()"></i>
+            <i style="display: none;" class="hidePass fa fa-eye-slash" onclick="hidePassword()"></i>
+          </div>
           <small class="error-box">{{error.message}}</small>
           <button type="submit">Login</button>
           <small

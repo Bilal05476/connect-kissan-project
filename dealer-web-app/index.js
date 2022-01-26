@@ -89,6 +89,7 @@ app.get("/dashboard", (req, res) => {
   const _token = localStorage.getItem("token");
   const _userName = localStorage.getItem("userName");
   const _userEmail = localStorage.getItem("userEmail");
+  const _userPhone = localStorage.getItem("userPhone");
   const _userDealer = localStorage.getItem("userDealer");
   if (!_token) {
     res.redirect("login");
@@ -98,6 +99,7 @@ app.get("/dashboard", (req, res) => {
         userName: _userName,
         userEmail: _userEmail,
         userDealer: _userDealer,
+        userPhone: _userPhone
       },
     });
   }
@@ -113,7 +115,7 @@ app.get("/logout", (req, res) => {
 
 // Create New User Into Database
 app.post("/register", async (req, res) => {
-  const { name, email, dealer, password } = req.body;
+  const { name, email, dealer, password, phone } = req.body;
   try {
     // check if user already exist
     // Validate if user exist in our database
@@ -129,6 +131,7 @@ app.post("/register", async (req, res) => {
         name,
         email: email.toLowerCase(),
         dealer,
+        phone,
         password: encryptedPassword,
       });
 
@@ -145,6 +148,7 @@ app.post("/register", async (req, res) => {
       localStorage.setItem("userName", user.name);
       localStorage.setItem("userEmail", user.email);
       localStorage.setItem("userDealer", user.dealer);
+      localStorage.setItem("userPhone", user.phone);
       res.status(201).redirect("/dashboard");
     }
   } catch (err) {
@@ -173,6 +177,7 @@ app.post("/login", async (req, res) => {
       localStorage.setItem("userName", user.name);
       localStorage.setItem("userEmail", user.email);
       localStorage.setItem("userDealer", user.dealer);
+      localStorage.setItem("userPhone", user.phone);
       res.status(201).redirect("/dashboard");
     }
   } catch (err) {

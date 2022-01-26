@@ -246,7 +246,7 @@ body {
   color: var(--orangeColor--);
   cursor: pointer;
 }
-.passLabel {
+/* .passLabel {
   text-align: center;
   color: #fff;
   cursor: pointer;
@@ -260,17 +260,8 @@ body {
 }
 #Pass:checked ~ .passLabel.show {
   display: none;
-}
-/* #signPass,
-.passLabel.hide {
-  display: none;
-}
-#signPass:checked ~ .passLabel.hide {
-  display: block;
-}
-#signPass:checked ~ .passLabel.show {
-  display: none;
 } */
+
 
 .small-nav-drawer.hide {
   display: none;

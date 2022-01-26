@@ -4,6 +4,7 @@ const userSchema = mongoose.Schema({
   name: String,
   dealer: String,
   email: { type: String, require: true, unique: true },
+  phone: String,
   password: { type: String, require: true },
   token: String,
 });

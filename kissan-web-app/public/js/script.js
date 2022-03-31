@@ -89,3 +89,5 @@ cityGetBtn.addEventListener("click", async () => {
     weatherIcon.classList.remove("fa-snowflake");
   }
 });
+
+// Google Map

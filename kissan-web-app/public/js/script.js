@@ -90,4 +90,4 @@ cityGetBtn.addEventListener("click", async () => {
   }
 });
 
-// Google Map
+// Google Map, lat, long

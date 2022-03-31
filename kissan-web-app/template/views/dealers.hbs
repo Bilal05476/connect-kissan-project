@@ -7,12 +7,32 @@
   <body>
     {{>navbar}}
     {{>search}}
-    <div class="map-integration">
-      <iframe 
-      src="https://www.google.com/maps/embed?pb=" 
-      height="450" style="border:0; width: 100%" allowfullscreen="true" loading="lazy" 
+    <button onclick="getLocation()">Find your Location</button>
+    <div>
+      <iframe id="map-integration" src="" 
+      height="400" style="border:0; width:100%" loading="lazy" 
       referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
+    {{!-- <iframe src="https://www.google.com/maps/embed?pb=" --}}
+    <script>
+    var mapLoc = document.getElementById("map-integration");
+
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else { 
+        mapLoc.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    }
+
+    function showPosition(position) {
+      mapLoc.setAttribute("src", 
+      `https://www.google.com/maps/?pb=${position.coords.latitude},${position.coords.longitude}`);
+    console.log(position.coords.latitude, position.coords.longitude)
+    }
+    </script>
+      {{!-- mapLoc.innerHTML = "Latitude: " + position.coords.latitude + 
+      "<br>Longitude: " + position.coords.longitude; --}}
    
     <script src="js/script.js"></script>
   </body>

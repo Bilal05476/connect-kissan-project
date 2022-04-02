@@ -11,11 +11,13 @@
   padding: 2rem;
   width: 40%;
 }
-.dashboard .left-board h4 {
+
+.dashboard .left-board h6 {
   font-weight: 300;
   margin: 2rem auto;
-  font-size: 1.4rem;
-  /* text-transform: uppercase; */
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: .1rem;
 }
 .dashboard .left-board .item-form {
   display: flex;

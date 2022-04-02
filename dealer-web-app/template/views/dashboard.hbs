@@ -8,24 +8,27 @@
     {{>navbar}}
     <div class="dashboard">
     <div class="left-board">
-        <h4>
+        <div class="user-info">
+        <h6>
             Your Name: <strong>{{user.userName}}</strong>
-        </h4>
-        <h4>
+            &nbsp;&nbsp;
             Your Email: <strong>{{user.userEmail}}</strong>
-        </h4>
-        <h4>
+        </h6>
+        
+        <h6>
             Your Phone: <strong>{{user.userPhone}}</strong>
-        </h4>
-        <h4>
+            &nbsp;&nbsp;
             Your DealerShip: <strong>{{user.userDealer}}</strong>
-        </h4>
-        <form class="item-form">
+        </h6>
+       
+        </div>
+        <form class="item-form" action="/add-item" method="post">
             <h2>Enter your Item</h2>
-            <input name="itemName" type="text" placeholder="Item name.." required />
-            <textarea name="itemDetails" rows="4" type="text" placeholder="Item description" required ></textarea>
-            <input name="itemType" type="text" placeholder="Item type" required />
-            <input name="itemPrice" type="text" placeholder="Item price" required />
+            <input name="itemName" type="text" placeholder="Item name.." required="true" />
+            <textarea name="itemDetails" rows="4" type="text" placeholder="Item description" required="true" ></textarea>
+            <input name="itemType" type="text" placeholder="Item type" required="true" />
+            <input name="itemPrice" type="text" placeholder="Item price" required="true" />
+            <input type="file" id="img" name="itemImg" accept="image/*">
             <button class="add-item" type="submit">Add Item</button>
         </form>
         <small>or</small>

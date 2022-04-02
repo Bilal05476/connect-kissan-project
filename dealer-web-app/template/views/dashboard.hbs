@@ -12,18 +12,13 @@
         <h6>
             Your Name: <strong>{{user.userName}}</strong>
             &nbsp;&nbsp;
-            Your Email: <strong>{{user.userEmail}}</strong>
-        </h6>
-        
-        <h6>
-            Your Phone: <strong>{{user.userPhone}}</strong>
-            &nbsp;&nbsp;
             Your DealerShip: <strong>{{user.userDealer}}</strong>
-        </h6>
-       
+        </h6> 
         </div>
         <form class="item-form" action="/add-item" method="post">
-            <h2>Enter your Item</h2>
+            <h2>Add your Item:</h2>
+            <input name="userEmail" value={{user.userEmail}} readonly="true" />
+            <input name="userPhone" value={{user.userPhone}} readonly="true" />
             <input name="itemName" type="text" placeholder="Item name.." required="true" />
             <textarea name="itemDetails" rows="4" type="text" placeholder="Item description" required="true" ></textarea>
             <input name="itemType" type="text" placeholder="Item type" required="true" />
@@ -31,14 +26,18 @@
             <input type="file" id="img" name="itemImg" accept="image/*">
             <button class="add-item" type="submit">Add Item</button>
         </form>
-        <small>or</small>
-        <div class="logout-div">
-            <a class="logout" href="/logout">Logout</a>
-        </div>
+        
     </div>
 
     <div class="right-board">
-        <h2>Your Items:</h2>
+        <div class="user-items">
+            <h2>Your Items:</h2>
+           
+        </div>
+        <div class="logout-div">
+            <a class="logout" href="/logout">Logout</a>
+        </div>
+        
     </div>
     </div>
     <script src="js/script.js"></script>

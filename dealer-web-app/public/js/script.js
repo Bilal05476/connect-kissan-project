@@ -16,3 +16,11 @@ labelId.addEventListener("click", () => {
   smallNav.classList.toggle("show");
   labelId.classList.toggle("show");
 });
+
+//fetch data
+// function fetchItemData(){
+//   const response = await fetch(
+//     "http://localhost:8080/"
+//   );
+//   const data = await response.json();
+// }

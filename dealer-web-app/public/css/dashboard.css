@@ -60,13 +60,22 @@
 .logout {
   text-decoration: none;
   background-color: crimson;
-  width: 100%;
+  width: 100px;
   text-align: center;
 }
 .dashboard .right-board {
-  background-color: var(--orangeColor--);
-  padding: 2rem;
   width: 40%;
+}
+.dashboard .user-items{
+  margin-top: 2rem;
+  padding: 2rem;
+  background-color: #0000007a;
+  border-radius: 5px;
+}
+.dashboard .user-items h2{
+  background-color: var(--orangeColor--);
+  padding: 1.2rem;
+  border-radius: 5px;
 }
 .logout-div {
   display: flex;

@@ -10,6 +10,7 @@ var localStorage = new LocalStorage("./scratch");
 
 import User from "./models/authSchema.js";
 import Contact from "./models/contactSchema.js";
+import Item from "./models/itemSchema.js";
 
 import { fileURLToPath } from "url";
 import { dirname } from "path";
@@ -85,7 +86,20 @@ app.get("/login", (req, res) => {
     res.redirect("dashboard");
   }
 });
+
 app.get("/dashboard", (req, res) => {
+  //Get Item from Database
+  const iData = Item.find((err, items) => items);
+  //Get User from Database
+  const uData = User.find((err, users) => users);
+
+  // User.find((err, user) => {
+  //   if (!err) {
+  //     const uData = user;
+  //   } else {
+  //     console.log("Failed to retrieve the User: " + err);
+  //   }
+  // });
   const _token = localStorage.getItem("token");
   const _userName = localStorage.getItem("userName");
   const _userEmail = localStorage.getItem("userEmail");
@@ -95,15 +109,20 @@ app.get("/dashboard", (req, res) => {
     res.redirect("login");
   } else {
     res.render("dashboard", {
-      user: {
-        userName: _userName,
-        userEmail: _userEmail,
-        userDealer: _userDealer,
-        userPhone: _userPhone
-      },
+      user: uData,
+      item: iData,
     });
+    console.log(uData)
   }
 });
+
+// {
+//         userName: _userName,
+//         userEmail: _userEmail,
+//         userDealer: _userDealer,
+//         userPhone: _userPhone,
+//       },
+
 app.get("/contact", (req, res) => {
   res.render("contact");
 });
@@ -139,7 +158,7 @@ app.post("/register", async (req, res) => {
       const token = jwt.sign({ user_id: user._id, email }, TOKEN_KEY, {
         expiresIn: "240h",
       });
-      
+
       // save user token
       user.token = token;
       await user.save();
@@ -202,6 +221,35 @@ app.post("/contact", async (req, res) => {
     res.status(201).redirect("/contact");
   } catch (err) {
     res.render("contact");
+  }
+});
+
+// Add Item
+app.post("/add-item", async (req, res) => {
+  const {
+    itemName,
+    itemDetails,
+    itemType,
+    itemPrice,
+    itemImg,
+    userEmail,
+    userPhone,
+  } = req.body;
+  const userItem = new Item({
+    userEmail,
+    userPhone,
+    itemName,
+    itemDetails,
+    itemType,
+    itemPrice,
+    itemImg,
+  });
+
+  try {
+    await userItem.save();
+    res.status(201).redirect("/dashboard");
+  } catch (err) {
+    res.render("dashboard");
   }
 });
 

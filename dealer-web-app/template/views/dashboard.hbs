@@ -10,7 +10,7 @@
     <div class="left-board">
         <div class="user-info">
         <h6>
-            Your Name: <strong>{{user.userName}}</strong>
+            Your Name: <strong>{{user.uname}}</strong>
             &nbsp;&nbsp;
             Your DealerShip: <strong>{{user.userDealer}}</strong>
         </h6> 
@@ -20,9 +20,9 @@
             <input name="userEmail" value={{user.userEmail}} readonly="true" />
             <input name="userPhone" value={{user.userPhone}} readonly="true" />
             <input name="itemName" type="text" placeholder="Item name.." required="true" />
-            <textarea name="itemDetails" rows="4" type="text" placeholder="Item description" required="true" ></textarea>
-            <input name="itemType" type="text" placeholder="Item type" required="true" />
-            <input name="itemPrice" type="text" placeholder="Item price" required="true" />
+            <textarea name="itemDetails" rows="4" type="text" placeholder="Item description.." required="true" ></textarea>
+            <input name="itemType" type="text" placeholder="Item type.." required="true" />
+            <input name="itemPrice" type="text" placeholder="Item price.." required="true" />
             <input type="file" id="img" name="itemImg" accept="image/*">
             <button class="add-item" type="submit">Add Item</button>
         </form>

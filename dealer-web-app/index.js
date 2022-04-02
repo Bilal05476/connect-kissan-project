@@ -87,41 +87,24 @@ app.get("/login", (req, res) => {
   }
 });
 
-app.get("/dashboard", (req, res) => {
-  //Get Item from Database
-  const iData = Item.find((err, items) => items);
-  //Get User from Database
-  const uData = User.find((err, users) => users);
-
-  // User.find((err, user) => {
-  //   if (!err) {
-  //     const uData = user;
-  //   } else {
-  //     console.log("Failed to retrieve the User: " + err);
-  //   }
-  // });
-  const _token = localStorage.getItem("token");
-  const _userName = localStorage.getItem("userName");
-  const _userEmail = localStorage.getItem("userEmail");
-  const _userPhone = localStorage.getItem("userPhone");
-  const _userDealer = localStorage.getItem("userDealer");
-  if (!_token) {
-    res.redirect("login");
-  } else {
-    res.render("dashboard", {
-      user: uData,
-      item: iData,
-    });
-    console.log(uData)
-  }
+app.get("/dashboard", async (req, res, email) => {
+  const user = await User.findOne({ email });
+  // Create token
+  const token = jwt.sign({ user_id: user._id, email }, TOKEN_KEY, {
+    expiresIn: "240h",
+  });
+  user.token = token;
+  res.render("dashboard", {
+    user: {
+      token: token,
+      userName: user.name,
+      userEmail: user.email,
+      userDealer: user.dealer,
+      userPhone: user.phone,
+    },
+  });
 });
 
-// {
-//         userName: _userName,
-//         userEmail: _userEmail,
-//         userDealer: _userDealer,
-//         userPhone: _userPhone,
-//       },
 
 app.get("/contact", (req, res) => {
   res.render("contact");
@@ -186,21 +169,11 @@ app.post("/login", async (req, res) => {
     const user = await User.findOne({ email });
 
     if (user && (await bcrypt.compare(password, user.password))) {
-      // Create token
-      const token = jwt.sign({ user_id: user._id, email }, TOKEN_KEY, {
-        expiresIn: "240h",
-      });
-      user.token = token;
-      //Setting localStorage Item
-      localStorage.setItem("token", token);
-      localStorage.setItem("userName", user.name);
-      localStorage.setItem("userEmail", user.email);
-      localStorage.setItem("userDealer", user.dealer);
-      localStorage.setItem("userPhone", user.phone);
-      res.status(201).redirect("/dashboard");
+      
+      res.status(201).redirect("/dashboard", email);
     }
   } catch (err) {
-    localStorage.setItem("error", err.message);
+    console.log("error", err.message);
     res.render("login");
   }
 });

@@ -1,12 +1,14 @@
 import express from "express";
 const utilityRoutes = express.Router();
 import Contact from "../models/contactSchema.js";
+import User from "../models/authSchema.js";
 
 utilityRoutes.get("/", (req, res) => {
   res.render("index");
 });
 
-utilityRoutes.get("/dashboard", (req, res) => {
+utilityRoutes.get("/dashboard", async (req, res) => {
+  // const user = await User.findById(req.user.id);
   res.render("dashboard");
 });
 
@@ -31,7 +33,7 @@ utilityRoutes.get("/form-submission", (req, res) => {
 });
 utilityRoutes.post("/contact-us", async (req, res) => {
   const { firstName, lastName, emailAddress, message, phoneNum } = req.body;
-  const userContact = await Contact.create({
+  await Contact.create({
     firstName,
     lastName,
     emailAddress,

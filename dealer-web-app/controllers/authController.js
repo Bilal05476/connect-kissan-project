@@ -16,15 +16,10 @@ const authenticateUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email });
 
   if (user && (await bcrypt.compare(password, user.password))) {
-    // res
-    //   .status(200)
-    //   .json({
-    //     message: `User Login with: ${user.email}`,
-    //     token: generateJWT(user._id),
-    //   });
+    const token = generateJWT(user._id);
+    console.log(token);
     res.status(201).redirect("/dashboard");
-  }
-  else{
+  } else {
     res.status(400);
     throw new Error("Invalid credentials");
   }
@@ -61,10 +56,8 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
   if (user) {
-    // res.status(201).json({
-    //   message: `User Created: ${user.email}`,
-    //   token: generateJWT(user._id)
-    // });
+    const token = generateJWT(user._id);
+    console.log(token);
     res.status(201).redirect("/dashboard");
   } else {
     res.status(400);
@@ -83,20 +76,19 @@ const registerUser = asyncHandler(async (req, res) => {
 // @route  GET api/user/me
 // @access Private
 const getUserData = asyncHandler(async (req, res) => {
-  const {_id, name, email} = await User.findById(req.user.id);
+  const { _id, name, email } = await User.findById(req.user.id);
   res.status(200).json({
     id: _id,
     name,
-    email
-  })
+    email,
+  });
 });
 
 // Generate JWT
 const generateJWT = (id) => {
   return jwt.sign({ id }, TOKEN_KEY, {
-    expiresIn: '30d'
+    expiresIn: "30d",
   });
-}
-
+};
 
 export { authenticateUser, registerUser, getUserData };

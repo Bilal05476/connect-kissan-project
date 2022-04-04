@@ -16,12 +16,13 @@ const authenticateUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email });
 
   if (user && (await bcrypt.compare(password, user.password))) {
-    res
-      .status(200)
-      .json({
-        message: `User Login with: ${user.email}`,
-        token: generateJWT(user._id),
-      });
+    // res
+    //   .status(200)
+    //   .json({
+    //     message: `User Login with: ${user.email}`,
+    //     token: generateJWT(user._id),
+    //   });
+    res.status(201).redirect("/dashboard");
   }
   else{
     res.status(400);
@@ -60,10 +61,11 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
   if (user) {
-    res.status(201).json({
-      message: `User Created: ${user.email}`,
-      token: generateJWT(user._id)
-    });
+    // res.status(201).json({
+    //   message: `User Created: ${user.email}`,
+    //   token: generateJWT(user._id)
+    // });
+    res.status(201).redirect("/dashboard");
   } else {
     res.status(400);
     throw new Error("Invalid user data");

@@ -10,6 +10,13 @@ utilityRoutes.get("/dashboard", (req, res) => {
   res.render("dashboard");
 });
 
+utilityRoutes.get("/register", (req, res) => {
+  res.render("register");
+});
+
+utilityRoutes.get("/login", (req, res) => {
+  res.render("login");
+});
 
 utilityRoutes.get("/about", (req, res) => {
   res.render("about");
@@ -33,7 +40,6 @@ utilityRoutes.post("/contact-us", async (req, res) => {
   });
 
   try {
-    await userContact.save();
     res.status(201).redirect("/form-submission");
   } catch (err) {
     res.render("contact");

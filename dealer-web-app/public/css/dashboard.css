@@ -32,7 +32,8 @@
   outline: none !important;
   color: #fff;
   margin-top: 1rem;
-
+  border-radius: 5px;
+  cursor: pointer;
   /* width: 100%; */
 }
 .dashboard .left-board .item-form input:focus,

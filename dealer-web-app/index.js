@@ -9,8 +9,7 @@ import { LocalStorage } from "node-localstorage";
 var localStorage = new LocalStorage("./scratch");
 
 import User from "./models/authSchema.js";
-import Contact from "./models/contactSchema.js";
-import Item from "./models/itemSchema.js";
+
 
 import { fileURLToPath } from "url";
 import { dirname } from "path";
@@ -35,6 +34,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 import itemRoutes from "./routes/itemRoutes.js";
 app.use("/api/items", itemRoutes);
 
+import authRoutes from "./routes/authRoutes.js";
+app.use("/api/user", authRoutes);
+
+import utilityRoutes from "./routes/utilityRoutes.js";
+app.use("/", utilityRoutes);
+
 //MiddleWare
 import { errorHandler } from "./middleware/errorMiddleware.js";
 app.use(errorHandler);
@@ -57,17 +62,8 @@ mongoose
 const port = process.env.PORT || 8080;
 
 // set different routes for different pages
-app.get("/", (req, res) => {
-  const _token = localStorage.getItem("token");
-  if (!_token) {
-    res.render("index");
-  } else {
-    res.redirect("dashboard");
-  }
-});
-app.get("/about", (req, res) => {
-  res.render("about");
-});
+
+
 app.get("/register", (req, res) => {
   const _token = localStorage.getItem("token");
   if (!_token) {
@@ -95,27 +91,6 @@ app.get("/login", (req, res) => {
   }
 });
 
-app.get("/dashboard", async (req, res, email) => {
-  const user = await User.findOne({ email });
-  // Create token
-  const token = jwt.sign({ user_id: user._id, email }, TOKEN_KEY, {
-    expiresIn: "240h",
-  });
-  user.token = token;
-  res.render("dashboard", {
-    user: {
-      token: token,
-      userName: user.name,
-      userEmail: user.email,
-      userDealer: user.dealer,
-      userPhone: user.phone,
-    },
-  });
-});
-
-app.get("/contact", (req, res) => {
-  res.render("contact");
-});
 
 app.get("/logout", (req, res) => {
   localStorage.clear();
@@ -184,53 +159,6 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// contact us
-app.post("/contact", async (req, res) => {
-  const { firstName, lastName, emailAddress, message, phoneNum } = req.body;
-  const userContact = new Contact({
-    firstName,
-    lastName,
-    emailAddress,
-    phoneNum,
-    message,
-  });
-
-  try {
-    await userContact.save();
-    res.status(201).redirect("/contact");
-  } catch (err) {
-    res.render("contact");
-  }
-});
-
-// Add Item
-app.post("/add-item", async (req, res) => {
-  const {
-    itemName,
-    itemDetails,
-    itemType,
-    itemPrice,
-    itemImg,
-    userEmail,
-    userPhone,
-  } = req.body;
-  const userItem = new Item({
-    userEmail,
-    userPhone,
-    itemName,
-    itemDetails,
-    itemType,
-    itemPrice,
-    itemImg,
-  });
-
-  try {
-    await userItem.save();
-    res.status(201).redirect("/dashboard");
-  } catch (err) {
-    res.render("dashboard");
-  }
-});
 
 app.listen(port, () => {
   console.log(`Server running on port: http://localhost:${port}`);

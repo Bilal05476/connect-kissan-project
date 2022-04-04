@@ -15,10 +15,8 @@
             Your DealerShip: <strong>{{user.userDealer}}</strong>
         </h6> 
         </div>
-        <form class="item-form" action="/add-item" method="post">
+        <form class="item-form" action="/api/items" method="post">
             <h2>Add your Item:</h2>
-            <input name="userEmail" value={{user.userEmail}} readonly="true" />
-            <input name="userPhone" value={{user.userPhone}} readonly="true" />
             <input name="itemName" type="text" placeholder="Item name.." required="true" />
             <textarea name="itemDetails" rows="4" type="text" placeholder="Item description.." required="true" ></textarea>
             <input name="itemType" type="text" placeholder="Item type.." required="true" />

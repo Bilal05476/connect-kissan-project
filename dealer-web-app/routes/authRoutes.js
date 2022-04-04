@@ -3,12 +3,12 @@ const authRoutes = express.Router();
 import {
   authenticateUser,
   registerUser,
-  logoutUser,
+  getUserData,
 } from "../controllers/authController.js";
+import protect from "../middleware/authMiddleware.js";
 
-// More Clean Way
-authRoutes.route("/").post(authenticateUser).post(registerUser);
-authRoutes.route("/:id").get(logoutUser);
-
+authRoutes.route("/").post(registerUser);
+authRoutes.route("/login").post(authenticateUser);
+authRoutes.get("/me", protect, getUserData);
 
 export default authRoutes;

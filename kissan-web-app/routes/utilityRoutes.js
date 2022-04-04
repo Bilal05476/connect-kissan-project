@@ -15,7 +15,7 @@ utilityRoutes.get("/form-submission", (req, res) => {
 });
 utilityRoutes.post("/contact-us", async (req, res) => {
   const { firstName, lastName, emailAddress, message, phoneNum } = req.body;
-  const userContact = new Contact({
+  const userContact = await Contact.create({
     firstName,
     lastName,
     emailAddress,

@@ -3,13 +3,6 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import config from "config";
 import path from "path";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
-import { LocalStorage } from "node-localstorage";
-var localStorage = new LocalStorage("./scratch");
-
-import User from "./models/authSchema.js";
-
 
 import { fileURLToPath } from "url";
 import { dirname } from "path";
@@ -46,9 +39,8 @@ app.use(errorHandler);
 
 // DB Config
 const db = config.get("mongoURI");
-
-// token
-const TOKEN_KEY = config.get("TOKEN_KEY");
+// Port Config
+const PORT = config.get("PORT");
 
 //Connect to Mongo
 mongoose
@@ -59,106 +51,9 @@ mongoose
   .then(() => console.log("MongoDB Connected :) ..."))
   .catch((err) => console.log(err.message));
 
-const port = process.env.PORT || 8080;
 
-// set different routes for different pages
-
-
-app.get("/register", (req, res) => {
-  const _token = localStorage.getItem("token");
-  if (!_token) {
-    const _error = localStorage.getItem("errorMessage");
-    res.render("register", {
-      error: {
-        message: _error,
-      },
-    });
-  } else {
-    res.redirect("dashboard");
-  }
-});
-app.get("/login", (req, res) => {
-  const _token = localStorage.getItem("token");
-  if (!_token) {
-    const _error = localStorage.getItem("errorMessage");
-    res.render("login", {
-      error: {
-        message: _error,
-      },
-    });
-  } else {
-    res.redirect("dashboard");
-  }
-});
-
-
-app.get("/logout", (req, res) => {
-  localStorage.clear();
-  res.render("logout");
-});
-
-// Create New User Into Database
-app.post("/register", async (req, res) => {
-  const { name, email, dealer, password, phone } = req.body;
-  try {
-    // check if user already exist
-    // Validate if user exist in our database
-    const oldUser = await User.findOne({ email });
-    if (oldUser) {
-      return res.status(201).redirect("/login");
-    } else {
-      //Encrypt user password
-      const encryptedPassword = await bcrypt.hash(password, 10);
-
-      // create a new user object with User constructor
-      const user = new User({
-        name,
-        email: email.toLowerCase(),
-        dealer,
-        phone,
-        password: encryptedPassword,
-      });
-
-      // generate token for a new user
-      const token = jwt.sign({ user_id: user._id, email }, TOKEN_KEY, {
-        expiresIn: "240h",
-      });
-
-      // save user token
-      user.token = token;
-      await user.save();
-      //Setting localStorage Item
-      localStorage.setItem("token", token);
-      localStorage.setItem("userName", user.name);
-      localStorage.setItem("userEmail", user.email);
-      localStorage.setItem("userDealer", user.dealer);
-      localStorage.setItem("userPhone", user.phone);
-      res.status(201).redirect("/dashboard");
-    }
-  } catch (err) {
-    localStorage.setItem("error", err.message);
-    res.render("register");
-  }
-});
-
-// Login User With Database
-
-app.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-
-  try {
-    // Validate if user exist in our database
-    const user = await User.findOne({ email });
-
-    if (user && (await bcrypt.compare(password, user.password))) {
-      res.status(201).redirect("/dashboard", email);
-    }
-  } catch (err) {
-    console.log("error", err.message);
-    res.render("login");
-  }
-});
-
+// Server Listen
+const port = PORT || 8080;
 
 app.listen(port, () => {
   console.log(`Server running on port: http://localhost:${port}`);

@@ -1,24 +1,100 @@
 import asyncHandler from "express-async-handler";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+import User from "../models/authSchema.js";
+import config from "config";
+
+// token
+const TOKEN_KEY = config.get("TOKEN_KEY");
 
 // @desc   Authenticate User
-// @route  GET api/user
+// @route  POST api/user/login
 // @access Public
 const authenticateUser = asyncHandler(async (req, res) => {
-  res.status(200).json({message: "Authenticate User"});
+  const { email, password } = req.body;
+  // Validate if user exist in our database
+  const user = await User.findOne({ email });
+
+  if (user && (await bcrypt.compare(password, user.password))) {
+    res
+      .status(200)
+      .json({
+        message: `User Login with: ${user.email}`,
+        token: generateJWT(user._id),
+      });
+  }
+  else{
+    res.status(400);
+    throw new Error("Invalid credentials");
+  }
 });
 
 // @desc   Register User
-// @route  GET api/user
+// @route  POST api/user
 // @access Public
 const registerUser = asyncHandler(async (req, res) => {
-  res.status(200).json({message: "Register User"});
+  const { name, email, dealer, password, phone } = req.body;
+  if (!name || !email || !dealer || !password || !phone) {
+    res.status(400);
+    throw new Error("Please add all fields");
+  }
+
+  // Validate if user exist in our database by email
+  const existUser = await User.findOne({ email });
+
+  if (existUser) {
+    res.status(400);
+    throw new Error("User already exist");
+  }
+
+  //Encrypt user password
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  // create a new user object with User constructor
+  const user = await User.create({
+    name,
+    email: email.toLowerCase(),
+    dealer,
+    phone,
+    password: hashedPassword,
+  });
+
+  if (user) {
+    res.status(201).json({
+      message: `User Created: ${user.email}`,
+      token: generateJWT(user._id)
+    });
+  } else {
+    res.status(400);
+    throw new Error("Invalid user data");
+  }
 });
 
 // @desc   Logout User
 // @route  GET api/user
 // @access Public
-const logoutUser = asyncHandler(async (req, res) => {
-  res.status(200).json({message: "Logout User"});
+// const logoutUser = asyncHandler(async (req, res) => {
+//   res.status(200).json({message: "Logout User"});
+// });
+
+// @desc   Get User Data
+// @route  GET api/user/me
+// @access Private
+const getUserData = asyncHandler(async (req, res) => {
+  const {_id, name, email} = await User.findById(req.user.id);
+  res.status(200).json({
+    id: _id,
+    name,
+    email
+  })
 });
 
-export {authenticateUser, registerUser, logoutUser}
+// Generate JWT
+const generateJWT = (id) => {
+  return jwt.sign({ id }, TOKEN_KEY, {
+    expiresIn: '30d'
+  });
+}
+
+
+export { authenticateUser, registerUser, getUserData };

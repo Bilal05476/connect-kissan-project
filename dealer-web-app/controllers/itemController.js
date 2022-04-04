@@ -1,11 +1,12 @@
 import asyncHandler from "express-async-handler";
 import Item from "../models/itemSchema.js";
+import User from "../models/authSchema.js";
 
 // @desc   Get Items
 // @route  GET api/items
 // @access Public
 const getItems = asyncHandler(async (req, res) => {
-  const items = await Item.find();
+  const items = await Item.find({ user: req.user.id });
   res.status(200).json(items);
 });
 
@@ -15,17 +16,18 @@ const getItems = asyncHandler(async (req, res) => {
 const setItem = asyncHandler(async (req, res) => {
   const { itemName, itemDetails, itemPrice, itemType, itemImg } = req.body;
   if (
-    !itemName |
-    !itemDetails |
-    !itemPrice |
-    !itemPrice |
-    !itemType |
+    !itemName ||
+    !itemDetails ||
+    !itemPrice ||
+    !itemPrice ||
+    !itemType ||
     !itemImg
   ) {
     res.status(400);
     throw new Error("Please add an item careFully");
   }
   const item = await Item.create({
+    user: req.user.id,
     itemName,
     itemDetails,
     itemPrice,
@@ -44,6 +46,21 @@ const updateItem = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Item not found");
   }
+
+  //Validate User, So user can only update his item
+  const user = await User.findById(req.user.id);
+
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  if (item.user.toString() !== user.id) {
+    res.status(401);
+    throw new Error("User not authorized");
+  }
+
+  // Update Item
   const updatedItem = await Item.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
   });
@@ -60,6 +77,19 @@ const deleteItem = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Item not found");
   }
+  //Validate User, So user can only delete his item
+  const user = await User.findById(req.user.id);
+
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  if (item.user.toString() !== user.id) {
+    res.status(401);
+    throw new Error("User not authorized");
+  }
+
   await item.remove();
   res.status(200).json({ id: req.params.id });
 });

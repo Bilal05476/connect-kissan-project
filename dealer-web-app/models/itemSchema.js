@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 
 const itemSchema = mongoose.Schema(
   {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'User'
+    },
     itemName: {
       type: String,
       required: [true, "Please provide item name"],
@@ -32,7 +37,3 @@ const itemSchema = mongoose.Schema(
 var Item = mongoose.model("Item", itemSchema);
 
 export default Item;
-// name: String,
-// dealer: String,
-// email: { type: String, require: true, unique: true },
-// phone: String,

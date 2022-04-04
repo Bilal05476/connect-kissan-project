@@ -1,12 +1,26 @@
 import mongoose from "mongoose";
 
-const contactSchema = mongoose.Schema({
-  firstName: String,
-  lastName: String,
-  emailAddress: String,
-  phoneNum: String,
-  message: String,
-});
+const contactSchema = mongoose.Schema(
+  {
+    firstName: {
+      type: String,
+      required: [true, "Please provide your first name"],
+    },
+    lastName: {
+      type: String,
+      required: [true, "Please provide your last name"],
+    },
+    emailAddress: {
+      type: String,
+      required: [true, "Please provide your email address"],
+    },
+    phoneNum: String,
+    message: String,
+  },
+  {
+    timestamps: true,
+  }
+);
 
 var Contact = mongoose.model("Contact", contactSchema);
 

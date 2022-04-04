@@ -6,10 +6,11 @@ import {
   updateItem,
   deleteItem,
 } from "../controllers/itemController.js";
+import protect from "../middleware/authMiddleware.js";
 
 // More Clean Way
-itemRoutes.route("/").get(getItems).post(setItem);
-itemRoutes.route("/:id").put(updateItem).delete(deleteItem);
+itemRoutes.route("/").get(protect, getItems).post(protect, setItem);
+itemRoutes.route("/:id").put(protect, updateItem).delete(protect, deleteItem);
 
 // Old Way
 // itemRoutes.get("/", getItems);

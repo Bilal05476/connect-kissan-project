@@ -31,6 +31,14 @@ hbs.registerPartials(partial_path);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//Routes
+import itemRoutes from "./routes/itemRoutes.js";
+app.use("/api/items", itemRoutes);
+
+//MiddleWare
+import { errorHandler } from "./middleware/errorMiddleware.js";
+app.use(errorHandler);
+
 // DB Config
 const db = config.get("mongoURI");
 
@@ -105,7 +113,6 @@ app.get("/dashboard", async (req, res, email) => {
   });
 });
 
-
 app.get("/contact", (req, res) => {
   res.render("contact");
 });
@@ -169,7 +176,6 @@ app.post("/login", async (req, res) => {
     const user = await User.findOne({ email });
 
     if (user && (await bcrypt.compare(password, user.password))) {
-      
       res.status(201).redirect("/dashboard", email);
     }
   } catch (err) {

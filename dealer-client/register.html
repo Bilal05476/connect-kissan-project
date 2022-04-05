@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/contact.css" />
+    <link rel="stylesheet" href="css/about.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <title>Connect Kissan | Register</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">
+        <h3><a href="index.html"> Connect Kissan </a></h3>
+      </div>
+      <div class="small-nav-icon">
+        <label id="navbar-chckd">
+          <div class="line line_1"></div>
+          <div class="line line_2"></div>
+          <div class="line line_3"></div>
+        </label>
+      </div>
+      <div class="navbar-menu">
+        <a href="dashboard.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+    <nav class="small-nav-drawer hide" id="small-nav">
+      <a href="dashboard.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <section class="main-content">
+      <div class="search-container">
+        <form action="/">
+          <input type="text" placeholder="type to text" name="search" />
+          <button type="submit">search</button>
+        </form>
+      </div>
+      <!--Sign Up-->
+      <div class="authenticate-box sign-up">
+        <h3>Sign up</h3>
+        <form action="/api/user/" method="post">
+          <input type="text" placeholder="Full Name.." name="name" required />
+          <input
+            type="text"
+            placeholder="Enter Dealership.."
+            name="dealer"
+            required
+          />
+          <input
+            type="email"
+            placeholder="Enter your Email.."
+            name="email"
+            required
+          />
+          <input
+            type="text"
+            placeholder="Phone Number.."
+            name="phone"
+            required
+          />
+          <input
+            type="password"
+            placeholder="Enter your Password.."
+            name="password"
+            required
+          />
+          <button type="submit">Sign Up</button>
+          <small
+            >Already a User? <br />
+            <a href="login.html">Login Here</a>
+          </small>
+        </form>
+      </div>
+    </section>
+    <script src="js/script.js"></script>
+  </body>
+</html>

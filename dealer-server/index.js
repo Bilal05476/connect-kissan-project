@@ -2,24 +2,24 @@ import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import config from "config";
-import path from "path";
+// import path from "path";
 
-import { fileURLToPath } from "url";
-import { dirname } from "path";
-import hbs from "hbs";
+// import { fileURLToPath } from "url";
+// import { dirname } from "path";
+// import hbs from "hbs";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = dirname(__filename);
 
 const app = express();
-const static_path = path.resolve(__dirname, "public");
-const template_path = path.resolve(__dirname, "template/views");
-const partial_path = path.resolve(__dirname, "template/partials");
+// const static_path = path.resolve(__dirname, "public");
+// const template_path = path.resolve(__dirname, "template/views");
+// const partial_path = path.resolve(__dirname, "template/partials");
 
-app.use(express.static(static_path));
-app.set("view engine", "hbs");
-app.set("views", template_path);
-hbs.registerPartials(partial_path);
+// app.use(express.static(static_path));
+// app.set("view engine", "hbs");
+// app.set("views", template_path);
+// hbs.registerPartials(partial_path);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 

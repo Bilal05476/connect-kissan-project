@@ -47,31 +47,46 @@
       <!--Sign Up-->
       <div class="authenticate-box sign-up">
         <h3>Sign up</h3>
-        <form action="/api/user/" method="post">
-          <input type="text" placeholder="Full Name.." name="name" required />
+        <form id="registerForm">
           <input
+            id="name"
+            type="text"
+            placeholder="Full Name.."
+            name="name"
+            required
+            value=""
+          />
+          <input
+            id="dealer"
             type="text"
             placeholder="Enter Dealership.."
             name="dealer"
             required
+            value=""
           />
           <input
+            id="email"
             type="email"
             placeholder="Enter your Email.."
             name="email"
             required
+            value=""
           />
           <input
+            id="phone"
             type="text"
             placeholder="Phone Number.."
             name="phone"
             required
+            value=""
           />
           <input
+            id="password"
             type="password"
             placeholder="Enter your Password.."
             name="password"
             required
+            value=""
           />
           <button type="submit">Sign Up</button>
           <small

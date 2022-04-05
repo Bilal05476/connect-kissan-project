@@ -1,88 +1,63 @@
 // @desc Global Variables
-var itemPORT = "http://localhost:8080/api/items/";
-var authPORT = "http://localhost:8080/api/user/";
-var getUserItem;
-
-// @desc
-window.onload = function () {
-  window.getUserItem = document.getElementById("get-item");
-  console.log(window.getUserItem);
-};
+var authPORT = "http://localhost:8080/api/user/login/";
+var registerPORT = "http://localhost:8080/api/user/";
 
 // @desc hide and show password
 function showPassword() {
-  document.getElementById("passInput").type = "text";
+  document.getElementById("loginPass").type = "text";
   document.querySelector(".showPass").style = "display: none;";
   document.querySelector(".hidePass").style = "display: block;";
 }
 function hidePassword() {
-  document.getElementById("passInput").type = "password";
+  document.getElementById("loginPass").type = "password";
   document.querySelector(".showPass").style = "display: block;";
   document.querySelector(".hidePass").style = "display: none;";
 }
-
 // @desc toggle small screen navbar
-var labelId = document.getElementById("navbar-chckd");
-var smallNav = document.getElementById("small-nav");
+labelId = document.getElementById("navbar-chckd");
+smallNav = document.getElementById("small-nav");
 labelId.addEventListener("click", () => {
   smallNav.classList.toggle("show");
   labelId.classList.toggle("show");
 });
 
-// @desc Get User Item
-// @desc Store Html id scope in the variable
-// var gd = document.getElementById("get-item");
-
-// @desc DOM event listener, call function on click
-getUserItem.addEventListener("click", () => {
-  console.log("Hello click");
-});
-// @desc async function for data fetching
-async function getItem() {
-  console.log("Hello World");
-  let itemPORT = "http://localhost:8080/api/items/";
-  const response = await fetch(itemPORT);
-  const data = await response.json();
-  console.log("Get Item", data.message);
+// @desc Login Form Submission
+if (document.getElementById("loginForm")) {
+  document.getElementById("loginForm").onsubmit = function (e) {
+    e.preventDefault();
+    userLogin();
+  };
 }
+async function userLogin() {
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPass").value;
+  const userInfo = { email, password };
 
-// @desc Post Item By User
-// @desc Store Html id scope in the variable
-const postUserItem = document.getElementById("item-submit");
-// @desc DOM event listener, call function on click
-postUserItem.addEventListener("click", setItem);
-// @desc async function for data fetching
-async function setItem(e) {
-  e.preventDefault();
-  let itemPORT = "http://localhost:8080/api/items/";
-  const itemName = document.getElementById("item-name").value;
-  const itemDesc = document.getElementById("item-desc").value;
-  const itemType = document.getElementById("item-type").value;
-  const itemPrice = document.getElementById("item-price").value;
-  const itemImg = document.getElementById("item-img").value;
-
-  const response = await fetch(itemPORT, {
+  const response = await fetch(window.authPORT, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      itemName,
-      itemDesc,
-      itemImg,
-      itemType,
-      itemPrice,
-    }),
+    body: JSON.stringify(userInfo),
   });
+
   const data = await response.json();
-  console.log("Set Item", data.message);
+  console.log("User", data);
+  if (data.message !== "Invalid credentials") {
+    localStorage.setItem("user", JSON.stringify(data));
+  }
 }
 
-// @desc Get User
-// async function getUser() {
-//   let authPORT = "http://localhost:5000/api/user/me";
-//   const response = await fetch(authPORT);
-//   const data = await response.json();
-//   console.log("Auth", data.message);
-// }
+// @desc Register Form Submission
+if (document.getElementById("registerForm")) {
+  document.getElementById("registerForm").onsubmit = function () {
+    userRegister();
+  };
+}
+async function userRegister() {
+  console.log(document.getElementById("name").value);
+  console.log(document.getElementById("dealer").value);
+  console.log(document.getElementById("email").value);
+  console.log(document.getElementById("phone").value);
+  console.log(document.getElementById("password").value);
+}

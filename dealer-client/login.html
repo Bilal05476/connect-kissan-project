@@ -47,19 +47,22 @@
       <!--Login-->
       <div class="authenticate-box login">
         <h3>Login</h3>
-        <form action="/api/user/login" method="POST">
+        <form id="loginForm">
           <input
             type="email"
+            id="loginEmail"
             placeholder="Enter your Email.."
             name="email"
             required
+            value=""
           />
           <input
             type="password"
-            id="passInput"
+            id="loginPass"
             placeholder="Enter your Password.."
             name="password"
             required
+            value=""
           />
           <div style="text-align: center; color: #fff">
             <i class="showPass fa fa-eye" onclick="showPassword()"></i>

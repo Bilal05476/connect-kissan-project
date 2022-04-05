@@ -19,7 +19,6 @@ const setItem = asyncHandler(async (req, res) => {
     !itemName ||
     !itemDetails ||
     !itemPrice ||
-    !itemPrice ||
     !itemType ||
     !itemImg
   ) {

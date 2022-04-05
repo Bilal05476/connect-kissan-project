@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import config from "config";
+import cors from "cors";
 // import path from "path";
 
 // import { fileURLToPath } from "url";
@@ -12,6 +13,7 @@ import config from "config";
 // const __dirname = dirname(__filename);
 
 const app = express();
+app.use(cors());
 // const static_path = path.resolve(__dirname, "public");
 // const template_path = path.resolve(__dirname, "template/views");
 // const partial_path = path.resolve(__dirname, "template/partials");

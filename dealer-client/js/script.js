@@ -1,3 +1,14 @@
+// @desc Global Variables
+var itemPORT = "http://localhost:8080/api/items/";
+var authPORT = "http://localhost:8080/api/user/";
+var getUserItem;
+
+// @desc
+window.onload = function () {
+  window.getUserItem = document.getElementById("get-item");
+  console.log(window.getUserItem);
+};
+
 // @desc hide and show password
 function showPassword() {
   document.getElementById("passInput").type = "text";
@@ -18,25 +29,39 @@ labelId.addEventListener("click", () => {
   labelId.classList.toggle("show");
 });
 
-// @desc Get User Data
-async function getUserData() {
-  let itemPORT = "http://localhost:5000/api/items/";
+// @desc Get User Item
+// @desc Store Html id scope in the variable
+// var gd = document.getElementById("get-item");
+
+// @desc DOM event listener, call function on click
+getUserItem.addEventListener("click", () => {
+  console.log("Hello click");
+});
+// @desc async function for data fetching
+async function getItem() {
+  console.log("Hello World");
+  let itemPORT = "http://localhost:8080/api/items/";
   const response = await fetch(itemPORT);
   const data = await response.json();
   console.log("Get Item", data.message);
 }
-// @desc Post User Data
-async function postUserData(token) {
-  let itemPORT = "http://localhost:5000/api/items/";
-  document.getElementById("item-submit").addEventListener("click", (e) => {
-    e.preventDefault();
-    const itemName = document.getElementById("item-name").value;
-    const itemDesc = document.getElementById("item-desc").value;
-    const itemType = document.getElementById("item-type").value;
-    const itemPrice = document.getElementById("item-price").value;
-    const itemImg = document.getElementById("item-img").value;
 
-    await fetch(itemPORT, {
+// @desc Post Item By User
+// @desc Store Html id scope in the variable
+const postUserItem = document.getElementById("item-submit");
+// @desc DOM event listener, call function on click
+postUserItem.addEventListener("click", setItem);
+// @desc async function for data fetching
+async function setItem(e) {
+  e.preventDefault();
+  let itemPORT = "http://localhost:8080/api/items/";
+  const itemName = document.getElementById("item-name").value;
+  const itemDesc = document.getElementById("item-desc").value;
+  const itemType = document.getElementById("item-type").value;
+  const itemPrice = document.getElementById("item-price").value;
+  const itemImg = document.getElementById("item-img").value;
+
+  const response = await fetch(itemPORT, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -49,15 +74,15 @@ async function postUserData(token) {
       itemType,
       itemPrice,
     }),
-  }).then((res) => res.json()).then((data) => console.log(data))
   });
-  
+  const data = await response.json();
+  console.log("Set Item", data.message);
 }
 
 // @desc Get User
-async function getUser() {
-  let authPORT = "http://localhost:5000/api/user/me";
-  const response = await fetch(authPORT);
-  const data = await response.json();
-  console.log("Auth", data.message);
-}
+// async function getUser() {
+//   let authPORT = "http://localhost:5000/api/user/me";
+//   const response = await fetch(authPORT);
+//   const data = await response.json();
+//   console.log("Auth", data.message);
+// }

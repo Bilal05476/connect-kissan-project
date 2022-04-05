@@ -27,9 +27,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 import itemRoutes from "./routes/itemRoutes.js";
 app.use("/api/items", itemRoutes);
 
-import authRoutes from "./routes/authRoutes.js";
-app.use("/api/user", authRoutes);
-
 import utilityRoutes from "./routes/utilityRoutes.js";
 app.use("/", utilityRoutes);
 
@@ -39,8 +36,7 @@ app.use(errorHandler);
 
 // DB Config
 const db = config.get("mongoURI");
-// Port Config
-const PORT = config.get("PORT");
+
 
 //Connect to Mongo
 mongoose
@@ -51,9 +47,8 @@ mongoose
   .then(() => console.log("MongoDB Connected :) ..."))
   .catch((err) => console.log(err.message));
 
-
 // Server Listen
-const port = PORT || 8080;
+const port = 8081;
 
 app.listen(port, () => {
   console.log(`Server running on port: http://localhost:${port}`);

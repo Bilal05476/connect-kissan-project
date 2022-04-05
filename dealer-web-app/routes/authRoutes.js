@@ -9,6 +9,6 @@ import protect from "../middleware/authMiddleware.js";
 
 authRoutes.route("/").post(registerUser);
 authRoutes.route("/login").post(authenticateUser);
-authRoutes.get("/me", protect, getUserData);
+authRoutes.route("/me").get(protect, getUserData);
 
 export default authRoutes;

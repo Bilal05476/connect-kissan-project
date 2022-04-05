@@ -17,8 +17,10 @@ const authenticateUser = asyncHandler(async (req, res) => {
 
   if (user && (await bcrypt.compare(password, user.password))) {
     const token = generateJWT(user._id);
-    console.log(token);
-    res.status(201).redirect("/dashboard");
+    res.status(200).json({
+      email: user.email,
+      token: token,
+    });
   } else {
     res.status(400);
     throw new Error("Invalid credentials");
@@ -57,20 +59,18 @@ const registerUser = asyncHandler(async (req, res) => {
 
   if (user) {
     const token = generateJWT(user._id);
-    console.log(token);
-    res.status(201).redirect("/dashboard");
+    res.status(200).json({
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      dealer: user.dealer,
+      token: token,
+    });
   } else {
     res.status(400);
     throw new Error("Invalid user data");
   }
 });
-
-// @desc   Logout User
-// @route  GET api/user
-// @access Public
-// const logoutUser = asyncHandler(async (req, res) => {
-//   res.status(200).json({message: "Logout User"});
-// });
 
 // @desc   Get User Data
 // @route  GET api/user/me

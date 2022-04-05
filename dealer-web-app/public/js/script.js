@@ -17,10 +17,14 @@ labelId.addEventListener("click", () => {
   labelId.classList.toggle("show");
 });
 
-//fetch data
-// function fetchItemData(){
-//   const response = await fetch(
-//     "http://localhost:8080/"
-//   );
-//   const data = await response.json();
-// }
+const authPORT = "http://localhost:5000/api/user/";
+
+// register user
+function getUserData() {
+  fetch(authPORT, {
+    method: "GET",
+    body: JSON.stringify(data),
+  }).then((res) => {
+    console.log("Request complete! response:", res);
+  });
+}

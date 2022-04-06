@@ -1,7 +1,6 @@
 import express from "express";
 const utilityRoutes = express.Router();
 import Contact from "../models/contactSchema.js";
-import User from "../models/authSchema.js";
 
 utilityRoutes.get("/", (req, res) => {
   res.json({ message: "Server Started" });
@@ -18,9 +17,10 @@ utilityRoutes.post("/contact-us", async (req, res) => {
   });
 
   try {
-    res.status(201).redirect("/form-submission");
+    // res.status(201).redirect("/form-submission");
+    req.status(200);
   } catch (err) {
-    res.render("contact");
+    res.status(401);
   }
 });
 

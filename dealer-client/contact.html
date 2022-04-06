@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-     <meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="css/index.css" />
-<link rel="stylesheet" href="css/contact.css" />
-<link rel="stylesheet" href="css/about.css" />
-<link rel="stylesheet" href="css/dashboard.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/contact.css" />
+    <link rel="stylesheet" href="css/about.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
     <link rel="stylesheet" href="css/contact.css" />
     <title>Connect Kissan | Contact</title>
   </head>
@@ -36,14 +39,38 @@
       <a href="contact.html">Contact</a>
     </nav>
     <section class="contact-content">
-      <form action="/contact-us" method="post" class="contact-form">
+      <form id="contactForm" class="contact-form">
         <div>
-          <input type="text" placeholder="First Name*" name="firstName" required/>
-          <input type="text" placeholder="Last Name*" name="lastName" required/>
+          <input
+            type="text"
+            placeholder="First Name*"
+            name="firstName"
+            id="firstName"
+            required
+          />
+          <input
+            type="text"
+            placeholder="Last Name*"
+            name="lastName"
+            id="lastName"
+            required
+          />
         </div>
 
-        <input type="text" placeholder="Phone Num" name="phoneNum" />
-        <input type="email" placeholder="Email Address*" name="emailAddress" required />
+        <input
+          type="text"
+          placeholder="Phone Num"
+          id="phoneNum"
+          name="phoneNum"
+          required
+        />
+        <input
+          type="email"
+          placeholder="Email Address*"
+          name="emailAddress"
+          id="emailAddress"
+          required
+        />
         <textarea
           name="message"
           id="message"
@@ -54,7 +81,7 @@
         <button type="submit" class="contact-form-button">Send Message</button>
       </form>
     </section>
-<script src="js/script.js"></script>
-
+    <script src="js/script.js"></script>
+    <script src="js/contact.js"></script>
   </body>
 </html>

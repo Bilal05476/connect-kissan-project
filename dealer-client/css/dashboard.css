@@ -47,7 +47,7 @@
   /* margin-bottom: 3rem; */
 }
 .dashboard .left-board .item-form .add-item,
-.logout {
+.logout, .item-button {
   margin-top: 1rem;
   background-color: var(--orangeColor--);
   padding: 1rem;
@@ -63,6 +63,7 @@
   background-color: crimson;
   width: 100px;
   text-align: center;
+  margin-left: 2rem;
 }
 .dashboard .right-board {
   width: 40%;

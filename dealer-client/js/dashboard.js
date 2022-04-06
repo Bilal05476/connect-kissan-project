@@ -1,28 +1,43 @@
 // @desc Global Variables
 var itemPORT = "http://localhost:8080/api/items/";
+var currentUser = JSON.parse(localStorage.getItem("user")) || null;
 
 // @desc Get User Item
 // @desc async function for data fetching
-async function getUserItem() {
-  const response = await fetch(window.itemPORT);
-  const data = await response.json();
-  console.log("Get Item", data.message);
+// @desc DOM event listener, call function on click
+if (document.getElementById("get-item")) {
+  document.getElementById("get-item").addEventListener("click", function (e) {
+    e.preventDefault();
+    getUserItem();
+  });
 }
-// getUserItem();
+async function getUserItem() {
+  const response = await fetch(window.itemPORT, {
+    headers: {
+      Authorization: `Bearer ${window.currentUser.token}`,
+      "User-Agent": "*",
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await response.json()
+  console.log("Get Item", data);
+}
+
 
 // @desc Post Item By User
 // @desc Store Html id scope in the variable
-// @desc DOM event listener, call function on click
+// @desc DOM event listener, call function on submit
 if (document.getElementById("setItem")) {
-  document.getElementById("setItem").onsubmit = function () {
+  document.getElementById("setItem").onsubmit = function (e) {
+    e.preventDefault();
     setItem();
   };
 }
 
 // @desc async function for setting item into database
-async function setItem(token) {
+async function setItem() {
   const itemName = document.getElementById("item-name").value;
-  const itemDesc = document.getElementById("item-desc").value;
+  const itemDetails = document.getElementById("item-details").value;
   const itemType = document.getElementById("item-type").value;
   const itemPrice = document.getElementById("item-price").value;
   const itemImg = document.getElementById("item-img").value;
@@ -30,12 +45,13 @@ async function setItem(token) {
   const response = await fetch(window.itemPORT, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${window.currentUser.token}`,
       "Content-Type": "application/json",
+      "User-Agent": "*",
     },
     body: JSON.stringify({
       itemName,
-      itemDesc,
+      itemDetails,
       itemImg,
       itemType,
       itemPrice,
@@ -43,13 +59,5 @@ async function setItem(token) {
   });
   const data = await response.json();
   console.log("Set Item", data);
-  localStorage.setItem("item", JSON.stringify(data))
+  localStorage.setItem("item", JSON.stringify(data));
 }
-
-// @desc Get User
-// async function getUser() {
-//   let authPORT = "http://localhost:5000/api/user/me";
-//   const response = await fetch(authPORT);
-//   const data = await response.json();
-//   console.log("Auth", data.message);
-// }

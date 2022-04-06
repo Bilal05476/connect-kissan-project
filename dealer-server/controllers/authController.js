@@ -14,11 +14,14 @@ const authenticateUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   // Validate if user exist in our database
   const user = await User.findOne({ email });
-
   if (user && (await bcrypt.compare(password, user.password))) {
     const token = generateJWT(user._id);
     res.status(200).json({
+      _id: user._id,
       email: user.email,
+      name: user.name,
+      phone: user.phone,
+      dealer: user.dealer,
       token: token,
     });
   } else {
@@ -64,6 +67,7 @@ const registerUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       dealer: user.dealer,
+      phone: user.phone,
       token: token,
     });
   } else {

@@ -23,7 +23,8 @@ app.use(cors());
 // app.set("views", template_path);
 // hbs.registerPartials(partial_path);
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json())
 
 //Routes
 import itemRoutes from "./routes/itemRoutes.js";

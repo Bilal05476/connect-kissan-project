@@ -15,13 +15,7 @@ const getItems = asyncHandler(async (req, res) => {
 // @access Private
 const setItem = asyncHandler(async (req, res) => {
   const { itemName, itemDetails, itemPrice, itemType, itemImg } = req.body;
-  if (
-    !itemName ||
-    !itemDetails ||
-    !itemPrice ||
-    !itemType ||
-    !itemImg
-  ) {
+  if (!itemName || !itemDetails || !itemPrice || !itemType || !itemImg) {
     res.status(400);
     throw new Error("Please add an item careFully");
   }

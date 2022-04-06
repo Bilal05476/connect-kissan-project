@@ -8,20 +8,26 @@
   z-index: 1;
 }
 .dashboard .left-board {
-  padding: 2rem;
   width: 40%;
 }
 
 .dashboard .left-board h6 {
   font-weight: 300;
-  margin: 2rem auto;
+  margin: 1.3rem auto;
   font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: .1rem;
+  padding: 2rem;
+  border-radius: 5px;
+  /* text-transform: uppercase; */
+  letter-spacing: .01rem;
+  background-color: #0000007a;
 }
 .dashboard .left-board .item-form {
   display: flex;
   flex-direction: column;
+}
+
+.user-info strong{
+  text-transform: capitalize;
 }
 
 .dashboard .left-board .item-form input,
@@ -84,7 +90,22 @@
   align-items: center;
   justify-content: center;
 }
-
+.item-content{
+  margin-top: 1rem;
+}
+.item-content .item{
+  margin: 1.4rem auto;
+  border-radius: 5px;
+  padding: 1.2rem;
+  background-color: #0000007a;
+  font-size: 1rem;
+}
+.item-content .item h4, 
+.item-content .item p{
+  margin: .5rem auto;
+  letter-spacing: .01rem;
+  text-align: justify;
+}
 @media (max-width: 782px) {
   .dashboard {
     flex-direction: column;

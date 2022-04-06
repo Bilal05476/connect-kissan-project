@@ -2,6 +2,16 @@
 var itemPORT = "http://localhost:8080/api/items/";
 var currentUser = JSON.parse(localStorage.getItem("user")) || null;
 
+let userItemsArray = [];
+console.log("User Items", userItemsArray);
+
+if (currentUser) {
+  document.querySelector(".username").innerHTML = currentUser.name;
+  document.querySelector(".userEmail").innerHTML = currentUser.email;
+  document.querySelector(".dealerShip").innerHTML = currentUser.dealer;
+  document.querySelector(".phone").innerHTML = currentUser.phone;
+}
+
 // @desc Get User Item
 // @desc async function for data fetching
 // @desc DOM event listener, call function on click
@@ -19,10 +29,12 @@ async function getUserItem() {
       "Content-Type": "application/json",
     },
   });
-  const data = await response.json()
-  console.log("Get Item", data);
-}
+  const data = await response.json();
+  window.userItemsArray = data;
 
+  if (window.userItemsArray) {
+  }
+}
 
 // @desc Post Item By User
 // @desc Store Html id scope in the variable
@@ -59,5 +71,4 @@ async function setItem() {
   });
   const data = await response.json();
   console.log("Set Item", data);
-  localStorage.setItem("item", JSON.stringify(data));
 }

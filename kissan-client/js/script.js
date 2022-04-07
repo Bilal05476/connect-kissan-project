@@ -112,9 +112,8 @@ async function getUserItem() {
     },
   });
   const data = await response.json();
-  if (data) {
-    setupItems(data);
-  }
+
+  setupItems(data);
 }
 
 const setupItems = (data) => {
@@ -122,35 +121,6 @@ const setupItems = (data) => {
     let item = "";
     data.map((doc, index) => {
       const temp = `
-        <div class="item" key=${index}>
-          <img src="images/2.jpg" />
-          <div>
-          <h4 class="i-name">Item Name: <span class="i-name">${doc.itemName}</span></h4>
-          <h4>Item Type: <span>${doc.itemType}</span></h4>
-          <h4>Item Price(Rs): <span>${doc.itemPrice}</span></h4>
-          <p>
-            Item Description:
-            <span>${doc.itemDetails}</span>
-          </p>
-          </div>
-          
-        </div>`;
-      item += temp;
-    });
-
-    document.querySelector(".item-content").innerHTML = item;
-  } else {
-    document.querySelector(".item-content").innerHTML =
-      '<div class="item"><h4 class="center-align">You have no items, add your items now!</h4></div>';
-  }
-};
-
-const cropItems = (data) => {
-  if (data.length) {
-    let item = "";
-    data.map((doc, index) => {
-      if (doc.itemType === "Crops") {
-        const temp = `
           <div class="item" key=${index}>
             <img src="images/2.jpg" />
             <div>
@@ -162,15 +132,13 @@ const cropItems = (data) => {
               <span>${doc.itemDetails}</span>
             </p>
             </div>
-            
           </div>`;
-        item += temp;
-      }
+      item += temp;
     });
 
-    document.querySelector(".crop-content").innerHTML = item;
+    document.querySelector(".item-content").innerHTML = item;
   } else {
-    document.querySelector(".crop-content").innerHTML =
+    document.querySelector(".item-content").innerHTML =
       '<div class="item"><h4 class="center-align">You have no items, add your items now!</h4></div>';
   }
 };

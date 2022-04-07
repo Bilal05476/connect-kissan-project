@@ -3,7 +3,6 @@ var authPORT = "http://localhost:8080/api/user/login/";
 var registerPORT = "http://localhost:8080/api/user/";
 var currentUser = JSON.parse(localStorage.getItem("user")) || null;
 
-
 // @desc hide and show password
 function showPassword() {
   document.getElementById("loginPass").type = "text";
@@ -86,11 +85,10 @@ async function userRegister() {
     body: JSON.stringify(userInfo),
   });
   const data = await response.json();
-  console.log(data);
+
   if (
     data.message === "User already exist" ||
-    data.message ||
-    "Please add all fields"
+    data.message === "Please add all fields"
   ) {
     if (document.getElementById("signError")) {
       document.getElementById("signError").innerHTML = data.message;

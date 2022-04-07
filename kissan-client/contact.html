@@ -75,27 +75,36 @@
       <a href="http://localhost:8080" target="blank">Join as Dealer</a>
     </nav>
     <section class="contact-content">
-      <form action="/contact" method="post" class="contact-form">
+      <form id="contactForm" class="contact-form">
         <div>
           <input
             type="text"
             placeholder="First Name*"
             name="firstName"
+            id="firstName"
             required
           />
           <input
             type="text"
             placeholder="Last Name*"
             name="lastName"
+            id="lastName"
             required
           />
         </div>
 
-        <input type="text" placeholder="Phone Num" name="phoneNum" />
+        <input
+          type="text"
+          placeholder="Phone Num"
+          id="phoneNum"
+          name="phoneNum"
+          required
+        />
         <input
           type="email"
           placeholder="Email Address*"
           name="emailAddress"
+          id="emailAddress"
           required
         />
         <textarea
@@ -109,5 +118,6 @@
       </form>
     </section>
     <script src="js/script.js"></script>
+    <script src="js/contact.js"></script>
   </body>
 </html>

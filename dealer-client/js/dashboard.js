@@ -3,7 +3,6 @@ var itemPORT = "http://localhost:8080/api/items/";
 var currentUser = JSON.parse(localStorage.getItem("user")) || null;
 
 let userItemsArray = [];
-console.log("User Items", userItemsArray);
 
 if (currentUser) {
   document.querySelector(".username").innerHTML = currentUser.name;
@@ -32,9 +31,27 @@ async function getUserItem() {
   const data = await response.json();
   window.userItemsArray = data;
 
-  if (window.userItemsArray) {
+  if (window.userItemsArray.length > 0) {
+    document.querySelector(".item-content").innerHTML = itemElement;
   }
 }
+
+// @desc Item Element in DOM
+const itemElement = userItemsArray.map(
+  (item, index) =>
+    `
+    <div class="item" key=${index}>
+      <h4 class="i-name">Item Name: <span class="i-name">${item.itemName}</span></h4>
+      <h4>Item Type: <span>${item.itemType}</span></h4>
+      <h4>Item Price: <span>${item.itemPrice}</span></h4>
+      <p>
+        Item Description:
+        <span>${item.itemDetails}</span>
+      </p>
+      <button onclick="deleteUserItem(${item._id})">Delete</button>
+    </div>
+  `
+);
 
 // @desc Post Item By User
 // @desc Store Html id scope in the variable
@@ -71,4 +88,19 @@ async function setItem() {
   });
   const data = await response.json();
   console.log("Set Item", data);
+}
+
+// @desc Delete User Item
+// @desc async function for data deleting
+async function deleteUserItem(itemId) {
+  const response = await fetch(`window.itemPORT${itemId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${window.currentUser.token}`,
+      "User-Agent": "*",
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await response.json();
+  console.log(data);
 }

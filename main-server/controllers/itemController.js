@@ -4,9 +4,18 @@ import User from "../models/authSchema.js";
 
 // @desc   Get Items
 // @route  GET api/items
-// @access Public
+// @access Private for Only Authorized User
 const getItems = asyncHandler(async (req, res) => {
   const items = await Item.find({ user: req.user.id });
+  res.status(200).json(items);
+});
+
+// @desc   Get Items
+// @route  GET api/items/all
+// @access Public for every client
+const getAllItems = asyncHandler(async (req, res) => {
+  const items = await Item.find();
+  // const user = await User.find({ user: items.user });
   res.status(200).json(items);
 });
 
@@ -87,4 +96,4 @@ const deleteItem = asyncHandler(async (req, res) => {
   res.status(200).json({ id: req.params.id });
 });
 
-export { getItems, setItem, updateItem, deleteItem };
+export { getItems, getAllItems, setItem, updateItem, deleteItem };

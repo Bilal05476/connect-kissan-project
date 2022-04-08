@@ -26,12 +26,6 @@
   display: flex;
   flex-direction: column;
 }
-.left-board .item-form h2{
-  background-color: var(--orangeColor--);
-  text-align: center;
-  border-radius: 5px;
-  padding: 1rem;
-}
 
 .user-info strong{
   text-transform: capitalize;
@@ -59,30 +53,24 @@
   margin: 2rem auto;
   /* margin-bottom: 3rem; */
 }
-.dashboard .left-board .item-form .add-item, .item-button {
+.dashboard .left-board .item-form .add-item,
+.logout, .item-button {
   margin-top: 1rem;
-  background-color: transparent;
+  background-color: var(--orangeColor--);
   padding: 1rem;
-  border: 1px solid var(--orangeColor--) ;
+  border: none !important;
   outline: none !important;
   cursor: pointer;
   color: #fff;
   border-radius: 5px;
-  font-size: 1rem;
   /* width: 100%; */
 }
-
-.dashboard .left-board .item-form .add-item:hover,
-.item-button:hover{
-background-color: var(--orangeColor--);
-}
-#logoutBtn {
+.logout {
   text-decoration: none;
   background-color: crimson;
+  width: 100px;
   text-align: center;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-left: 5rem;
+  margin-left: 2rem;
 }
 .dashboard .right-board {
   width: 40%;
@@ -97,7 +85,6 @@ background-color: var(--orangeColor--);
   background-color: var(--orangeColor--);
   padding: 1.2rem;
   border-radius: 5px;
-  text-align: center;
 }
 .logout-div {
   display: flex;
@@ -188,8 +175,5 @@ background-color: var(--orangeColor--);
   .dashboard .right-board {
     width: 80%;
     margin-bottom: 2rem;
-  }
-  #logoutBtn{
-    margin-left: .6rem;
   }
 }

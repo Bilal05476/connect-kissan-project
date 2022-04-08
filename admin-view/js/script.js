@@ -1,30 +1,7 @@
 // @desc Global Variables
 var authPORT = "http://localhost:8080/api/user/login/";
 var registerPORT = "http://localhost:8080/api/user/";
-var contactPORT = "http://localhost:8080/contact-us";
 var currentUser = JSON.parse(localStorage.getItem("user")) || null;
-
-setTimeout(showPage, 1000);
-
-function showPage() {
-  const dashboardRedirection =
-    "http://127.0.0.1:5500/dealer-client/dashboard.html";
-  const loginHref = "http://127.0.0.1:5500/dealer-client/login.html";
-  const registerHref = "http://127.0.0.1:5500/dealer-client/login.html";
-  if (window.currentUser !== null) {
-    if (
-      window.location.href === loginHref ||
-      window.location.href === registerHref
-    ) {
-      window.location.replace(dashboardRedirection);
-    }
-  }
-  if (window.currentUser === null) {
-    if (window.location.href === dashboardRedirection) {
-      window.location.replace(loginHref);
-    }
-  }
-}
 
 // @desc hide and show password
 function showPassword() {
@@ -80,7 +57,6 @@ async function userLogin() {
     localStorage.setItem("user", JSON.stringify(data));
     window.currentUser = data;
     console.clear();
-    showPage();
   }
 }
 
@@ -126,55 +102,5 @@ async function userRegister() {
     localStorage.setItem("user", JSON.stringify(data));
     window.currentUser = data;
     console.clear();
-    showPage();
   }
-}
-
-// @desc logout user
-if (document.getElementById("logoutBtn")) {
-  document.getElementById("logoutBtn").onclick = function () {
-    // e.preventDefault();
-    if (window.currentUser) {
-      localStorage.clear();
-      showPage();
-    }
-  };
-}
-
-// @desc Contact Form Submission
-if (document.getElementById("contactForm")) {
-  document.getElementById("contactForm").onsubmit = function (e) {
-    e.preventDefault();
-    userContact();
-  };
-}
-
-async function userContact() {
-  const firstName = document.getElementById("firstName").value;
-  const lastName = document.getElementById("lastName").value;
-  const emailAddress = document.getElementById("emailAddress").value;
-  const phoneNum = document.getElementById("phoneNum").value;
-  const message = document.getElementById("message").value;
-  const contactInfo = { firstName, lastName, emailAddress, phoneNum, message };
-
-  const resp = await fetch(window.contactPORT, {
-    method: "POST",
-    headers: {
-      "User-Agent": "*",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(contactInfo),
-  });
-
-  const data = await resp.json();
-
-  if (data) {
-    formPageRedirect();
-  }
-}
-
-function formPageRedirect() {
-  window.location.replace(
-    "http://127.0.0.1:5500/dealer-client/formSubmission.html"
-  );
 }

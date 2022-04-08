@@ -97,8 +97,6 @@ if (cityGetBtn) {
 }
 
 // @desc Get User Item
-// @desc async function for data fetching
-// @desc DOM event listener, call function on click
 // DOMContentLoaded load all the items when client visit the website immediately
 document.addEventListener("DOMContentLoaded", function () {
   getUserItem();
@@ -124,13 +122,17 @@ const setupItems = (data) => {
           <div class="item" key=${index}>
             <img src="images/2.jpg" />
             <div>
-            <h4 class="i-name">Item Name: <span class="i-name">${doc.itemName}</span></h4>
-            <h4>Item Type: <span>${doc.itemType}</span></h4>
-            <h4>Item Price(Rs): <span>${doc.itemPrice}</span></h4>
-            <p>
-              Item Description:
-              <span>${doc.itemDetails}</span>
-            </p>
+              <h4 class="i-name">Item Name: <span class="i-name">${doc.itemName}</span></h4>
+              <h4>Item Type: <span>${doc.itemType}</span></h4>
+              <h4>Item Price(Rs): <span>${doc.itemPrice}</span></h4>
+              <p>
+                Item Description:
+                <span>${doc.itemDetails}</span>
+              </p>
+              <div class="dealer-info">
+                <h4>Dealer Name: <span>${doc.itemUserName}</span></h4>
+                <h4>Dealer Contact: <span>${doc.itemUserPhone}</span></h4>
+              </div>
             </div>
           </div>`;
       item += temp;
@@ -139,6 +141,7 @@ const setupItems = (data) => {
     document.querySelector(".item-content").innerHTML = item;
   } else {
     document.querySelector(".item-content").innerHTML =
-      '<div class="item"><h4 class="center-align">You have no items, add your items now!</h4></div>';
+      '<div class="item"><h4 class="center-align">No Items to Show!</h4></div>';
   }
 };
+

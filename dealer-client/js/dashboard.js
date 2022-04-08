@@ -2,12 +2,16 @@
 var itemPORT = "http://localhost:8080/api/items/";
 var currentUser = JSON.parse(localStorage.getItem("user")) || null;
 
-if (currentUser) {
-  document.querySelector(".username").innerHTML = currentUser.name;
-  document.querySelector(".userEmail").innerHTML = currentUser.email;
-  document.querySelector(".dealerShip").innerHTML = currentUser.dealer;
-  document.querySelector(".phone").innerHTML = currentUser.phone;
-}
+// @desc Call function onload
+// DOMContentLoaded load the user when dealer visit the website immediately
+document.addEventListener("DOMContentLoaded", function () {
+  if (currentUser) {
+    document.querySelector(".username").innerHTML = currentUser.name;
+    document.querySelector(".userEmail").innerHTML = currentUser.email;
+    document.querySelector(".dealerShip").innerHTML = currentUser.dealer;
+    document.querySelector(".phone").innerHTML = currentUser.phone;
+  }
+});
 
 // @desc Get User Item
 // @desc async function for data fetching
@@ -18,6 +22,8 @@ if (document.getElementById("get-item")) {
     getUserItem();
   });
 }
+
+// @desc async function for getting item from database
 async function getUserItem() {
   const response = await fetch(window.itemPORT, {
     headers: {
@@ -33,6 +39,8 @@ async function getUserItem() {
   }
 }
 
+// @desc Get User Item and Setup UI
+// @desc DOM, call function on data fetching
 const setupItems = (data) => {
   if (data.length) {
     let item = "";
@@ -40,14 +48,19 @@ const setupItems = (data) => {
       const id = doc._id;
       const temp = `
         <div class="item" key=${index}>
-          <h4 class="i-name">Item Name: <span class="i-name">${doc.itemName}</span></h4>
-          <h4>Item Type: <span>${doc.itemType}</span></h4>
-          <h4>Item Price(Rs): <span>${doc.itemPrice}</span></h4>
-          <p>
-            Item Description:
-            <span>${doc.itemDetails}</span>
-          </p>
-          <button onclick="deleteUserItem(${id})">Delete</button>
+          <img src="images/2.jpg" />
+          <div>
+            <h4 class="i-name">Item Name: <span class="i-name">${doc.itemName}</span></h4>
+            <h4>Item Type: <span>${doc.itemType}</span></h4>
+            <h4>Item Price(Rs): <span>${doc.itemPrice}</span></h4>
+            <p>
+              Item Description:
+              <span>${doc.itemDetails}</span>
+            </p>
+            <div>
+              <button onclick="deleteUserItem(${id})">Delete</button>
+            </div>
+          </div>
         </div>`;
       item += temp;
     });
@@ -76,6 +89,8 @@ async function setItem() {
   const itemType = document.getElementById("item-type").value;
   const itemPrice = document.getElementById("item-price").value;
   const itemImg = document.getElementById("item-img").value;
+  const itemUserName = window.currentUser.name;
+  const itemUserPhone = window.currentUser.phone;
 
   await fetch(window.itemPORT, {
     method: "POST",
@@ -90,6 +105,8 @@ async function setItem() {
       itemImg,
       itemType,
       itemPrice,
+      itemUserName,
+      itemUserPhone
     }),
   });
   document.getElementById("s-message").innerHTML =

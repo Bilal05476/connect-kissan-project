@@ -23,7 +23,7 @@ const getAllItems = asyncHandler(async (req, res) => {
 // @route  POST api/item
 // @access Private
 const setItem = asyncHandler(async (req, res) => {
-  const { itemName, itemDetails, itemPrice, itemType, itemImg } = req.body;
+  const { itemName, itemDetails, itemPrice, itemType, itemImg, itemUserName, itemUserPhone } = req.body;
   if (!itemName || !itemDetails || !itemPrice || !itemType || !itemImg) {
     res.status(400);
     throw new Error("Please add an item careFully");
@@ -35,6 +35,8 @@ const setItem = asyncHandler(async (req, res) => {
     itemPrice,
     itemType,
     itemImg,
+    itemUserName,
+    itemUserPhone
   });
   res.status(200).json(item);
 });

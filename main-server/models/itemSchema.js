@@ -5,7 +5,7 @@ const itemSchema = mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: 'User'
+      ref: "User",
     },
     itemName: {
       type: String,
@@ -27,6 +27,12 @@ const itemSchema = mongoose.Schema(
     itemImg: {
       type: String,
       required: [true, "Please provide relevant image"],
+    },
+    itemUserName: {
+      type: String,
+    },
+    itemUserPhone: {
+      type: String,
     },
   },
   {

@@ -244,15 +244,15 @@ body {
   background-color: #000000a4;
   font-size: 1rem;
 }
- .item img{
+.item img{
   margin-right: .9rem;
   border-radius: 5px;
   width: 200px;
   height: 200px;
 }
 
- .item h4,
- .item p {
+.item h4,
+.item p {
   margin: .5rem auto;
   letter-spacing: .01rem;
   text-align: justify;
@@ -263,6 +263,16 @@ body {
 .item span{
   font-weight: 300;
   color: #f1f1f1;
+}
+
+.item .dealer-info {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+.item .dealer-info h4{
+  margin: 0;
+  margin-left: 1rem;
 }
 
 
@@ -339,9 +349,17 @@ body {
   .item-content .item {
     margin: 1.4rem auto;
     border-radius: 5px;
+    flex-direction: column;
     width: 80%;
     padding: 1.2rem;
     background-color: #000000a4;
     font-size: 1rem;
   }
+  .item .dealer-info {
+    flex-direction: column;
+  }
+  .item .dealer-info h4{
+    margin-left: auto;
+  }
+
 }

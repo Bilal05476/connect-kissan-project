@@ -110,7 +110,6 @@ async function getUserItem() {
     },
   });
   const data = await response.json();
-
   setupItems(data);
 }
 
@@ -119,22 +118,22 @@ const setupItems = (data) => {
     let item = "";
     data.map((doc, index) => {
       const temp = `
-          <div class="item" key=${index}>
-            <img src="images/2.jpg" />
-            <div>
-              <h4 class="i-name">Item Name: <span class="i-name">${doc.itemName}</span></h4>
-              <h4>Item Type: <span>${doc.itemType}</span></h4>
-              <h4>Item Price(Rs): <span>${doc.itemPrice}</span></h4>
-              <p>
-                Item Description:
-                <span>${doc.itemDetails}</span>
-              </p>
-              <div class="dealer-info">
-                <h4>Dealer Name: <span>${doc.itemUserName}</span></h4>
-                <h4>Dealer Contact: <span>${doc.itemUserPhone}</span></h4>
+            <div class="item" key=${index}>
+              <img src="images/2.jpg" />
+              <div>
+                <h4 class="i-name">Item Name: <span class="i-name">${doc.itemName}</span></h4>
+                <h4>Item Type: <span>${doc.itemType}</span></h4>
+                <h4>Item Price(Rs): <span>${doc.itemPrice}</span></h4>
+                <p>
+                  Item Description:
+                  <span>${doc.itemDetails}</span>
+                </p>
+                <div class="dealer-info">
+                  <h4>Dealer Name: <span>${doc.itemUserName}</span></h4>
+                  <h4>Dealer Contact: <span>${doc.itemUserPhone}</span></h4>
+                </div>
               </div>
-            </div>
-          </div>`;
+            </div>`;
       item += temp;
     });
 
@@ -144,4 +143,3 @@ const setupItems = (data) => {
       '<div class="item"><h4 class="center-align">No Items to Show!</h4></div>';
   }
 };
-

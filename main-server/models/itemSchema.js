@@ -10,7 +10,6 @@ const itemSchema = mongoose.Schema(
     itemName: {
       type: String,
       required: [true, "Please provide item name"],
-      unique: [true, "This name item is already exist"],
     },
     itemDetails: {
       type: String,
@@ -26,7 +25,6 @@ const itemSchema = mongoose.Schema(
     },
     itemImg: {
       type: String,
-      required: [true, "Please provide relevant image"],
     },
     itemUserName: {
       type: String,

@@ -2,6 +2,7 @@ import asyncHandler from "express-async-handler";
 import Item from "../models/itemSchema.js";
 import User from "../models/authSchema.js";
 
+
 // @desc   Get Items
 // @route  GET api/items
 // @access Private for Only Authorized User
@@ -23,11 +24,21 @@ const getAllItems = asyncHandler(async (req, res) => {
 // @route  POST api/item
 // @access Private
 const setItem = asyncHandler(async (req, res) => {
-  const { itemName, itemDetails, itemPrice, itemType, itemImg, itemUserName, itemUserPhone } = req.body;
-  if (!itemName || !itemDetails || !itemPrice || !itemType || !itemImg) {
+  const {
+    itemName,
+    itemDetails,
+    itemPrice,
+    itemType,
+    itemImg,
+    itemUserName,
+    itemUserPhone,
+  } = req.body;
+  if (!itemName || !itemDetails || !itemPrice || !itemType) {
     res.status(400);
     throw new Error("Please add an item careFully");
   }
+  
+
   const item = await Item.create({
     user: req.user.id,
     itemName,
@@ -36,7 +47,7 @@ const setItem = asyncHandler(async (req, res) => {
     itemType,
     itemImg,
     itemUserName,
-    itemUserPhone
+    itemUserPhone,
   });
   res.status(200).json(item);
 });

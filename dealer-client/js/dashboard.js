@@ -92,7 +92,7 @@ async function setItem() {
   const itemUserName = window.currentUser.name;
   const itemUserPhone = window.currentUser.phone;
 
-  await fetch(window.itemPORT, {
+  const resp = await fetch(window.itemPORT, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${window.currentUser.token}`,
@@ -106,12 +106,16 @@ async function setItem() {
       itemType,
       itemPrice,
       itemUserName,
-      itemUserPhone
+      itemUserPhone,
     }),
   });
-  document.getElementById("s-message").innerHTML =
-    "Item added successfully! Click on get my items";
-  document.getElementById("s-message").classList.add("success-message");
+  const data = await resp.json();
+  console.log(data)
+  if (data) {
+    document.getElementById("s-message").innerHTML =
+      "Item add successfully! Click on get my items button!";
+    document.getElementById("s-message").classList.add("success-message");
+  }
 }
 
 // @desc Delete User Item

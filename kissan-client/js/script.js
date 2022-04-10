@@ -161,8 +161,23 @@ async function userContact() {
   const phoneNum = document.getElementById("phoneNum").value;
   const message = document.getElementById("message").value;
   const contactInfo = { firstName, lastName, emailAddress, phoneNum, message };
+  document.querySelector(".formSubmission").innerHTML = `
+    <h3 style="margin: 1rem auto; text-align: center; color: #f1f1f1; font-size: 1rem">
+      Thank You! Your details are submitted, We'll contact you soon :)...
+    </h3>
+    <a
+      style="
+        color: #f1f1f1;
+        background-color: rgb(236, 153, 0);
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin: 1rem auto;
+      "
+      href="index.html">Home
+    </a>`;
 
-  const resp = await fetch(window.contactPORT, {
+  await fetch(window.contactPORT, {
     method: "POST",
     headers: {
       "User-Agent": "*",
@@ -170,16 +185,5 @@ async function userContact() {
     },
     body: JSON.stringify(contactInfo),
   });
-
-  const data = await resp.json();
-
-  if (data) {
-    formPageRedirect();
-  }
 }
 
-function formPageRedirect() {
-  window.location.replace(
-    "http://127.0.0.1:5500/kissan-client/formSubmission.html"
-  );
-}

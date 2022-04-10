@@ -121,7 +121,7 @@ const setupItems = (data) => {
     data.map((doc, index) => {
       const temp = `
             <div class="item" key=${index}>
-              <img src="images/2.jpg" />
+              <img src=${doc.itemImg} />
               <div>
                 <h4 class="i-name">Item Name: <span class="i-name">${doc.itemName}</span></h4>
                 <h4>Item Type: <span>${doc.itemType}</span></h4>

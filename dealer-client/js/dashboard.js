@@ -46,10 +46,10 @@ const setupItems = (data) => {
   if (data.length) {
     let item = "";
     data.map((doc, index) => {
-      const id = doc._id;
+      // const id = doc._id;
       const temp = `
         <div class="item" key=${index}>
-          <img src="images/2.jpg" />
+          <img src=${doc.itemImg} />
           <div>
             <h4 class="i-name">Item Name: <span class="i-name">${doc.itemName}</span></h4>
             <h4>Item Type: <span>${doc.itemType}</span></h4>
@@ -59,7 +59,7 @@ const setupItems = (data) => {
               <span>${doc.itemDetails}</span>
             </p>
             <div>
-              <button onclick="deleteUserItem(${id})">Delete</button>
+              <button>Delete</button>
             </div>
           </div>
         </div>`;
@@ -96,7 +96,7 @@ function getBase64(file) {
 async function setItem() {
   const itemName = document.getElementById("item-name").value;
   const itemDetails = document.getElementById("item-details").value;
-  const itemType = document.getElementById("item-type").value.lowerCase();
+  const itemType = document.getElementById("item-type").value;
   const itemPrice = document.getElementById("item-price").value;
   const itemImg = document.querySelector("#item-img");
   const itemUserName = window.currentUser.name;
@@ -107,13 +107,14 @@ async function setItem() {
   reader.onload = async function () {
     const img = reader.result; //base64encoded string
     window.itemImage = img;
-    if (window.itemImage === "undefined") {
-      document.querySelector("#confirm-message").innerHTML =
-        "Click again to confirm";
-    } else {
-      document.querySelector("#confirm-message").innerHTML = " ";
-    }
   };
+
+  if (!window.itemImage) {
+    document.querySelector("#confirm-message").innerHTML =
+      "Click again to confirm";
+  } else {
+    document.querySelector("#confirm-message").innerHTML = " ";
+  }
 
   if (window.itemImage) {
     const resp = await fetch(window.itemPORT, {
@@ -134,7 +135,6 @@ async function setItem() {
       }),
     });
     const data = await resp.json();
-    console.log(data);
     if (data) {
       document.getElementById("s-message").innerHTML =
         "Item add successfully! Click on get my items button!";

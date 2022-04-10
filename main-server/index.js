@@ -3,28 +3,24 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import config from "config";
 import cors from "cors";
-// import path from "path";
-
-// import { fileURLToPath } from "url";
-// import { dirname } from "path";
-// import hbs from "hbs";
-
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = dirname(__filename);
 
 const app = express();
 app.use(cors());
-// const static_path = path.resolve(__dirname, "public");
-// const template_path = path.resolve(__dirname, "template/views");
-// const partial_path = path.resolve(__dirname, "template/partials");
 
-// app.use(express.static(static_path));
-// app.set("view engine", "hbs");
-// app.set("views", template_path);
-// hbs.registerPartials(partial_path);
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json())
+app.use(
+  bodyParser.json({
+    limit: "50mb",
+  })
+);
+
+app.use(
+  bodyParser.urlencoded({
+    limit: "50mb",
+    parameterLimit: 100000,
+    extended: true,
+  })
+);
 
 //Routes
 import itemRoutes from "./routes/itemRoutes.js";

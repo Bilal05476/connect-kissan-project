@@ -44,7 +44,7 @@ const setItem = asyncHandler(async (req, res) => {
     itemName,
     itemDetails,
     itemPrice,
-    itemType,
+    itemType: itemType.toLowerCase(),
     itemImg,
     itemUserName,
     itemUserPhone,

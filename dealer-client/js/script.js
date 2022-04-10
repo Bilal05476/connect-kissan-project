@@ -56,7 +56,7 @@ if (document.getElementById("loginForm")) {
 async function userLogin() {
   const email = document.getElementById("loginEmail").value;
   const password = document.getElementById("loginPass").value;
-  const userInfo = { email, password };
+  const userInfo = { email: email.toLowerCase(), password };
 
   const response = await fetch(window.authPORT, {
     method: "POST",

@@ -1,6 +1,7 @@
 // @desc Global Variables
 var itemPORT = "http://localhost:8080/api/items/";
 var currentUser = JSON.parse(localStorage.getItem("user")) || null;
+let itemImage = "";
 
 // @desc Call function onload
 // DOMContentLoaded load the user when dealer visit the website immediately
@@ -82,39 +83,63 @@ if (document.getElementById("setItem")) {
   };
 }
 
+// @desc convert file into base64
+function getBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+  });
+}
+
 // @desc async function for setting item into database
 async function setItem() {
   const itemName = document.getElementById("item-name").value;
   const itemDetails = document.getElementById("item-details").value;
-  const itemType = document.getElementById("item-type").value;
+  const itemType = document.getElementById("item-type").value.lowerCase();
   const itemPrice = document.getElementById("item-price").value;
-  const itemImg = document.getElementById("item-img").value;
+  const itemImg = document.querySelector("#item-img");
   const itemUserName = window.currentUser.name;
   const itemUserPhone = window.currentUser.phone;
 
-  const resp = await fetch(window.itemPORT, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${window.currentUser.token}`,
-      "Content-Type": "application/json",
-      "User-Agent": "*",
-    },
-    body: JSON.stringify({
-      itemName,
-      itemDetails,
-      itemImg,
-      itemType,
-      itemPrice,
-      itemUserName,
-      itemUserPhone,
-    }),
-  });
-  const data = await resp.json();
-  console.log(data)
-  if (data) {
-    document.getElementById("s-message").innerHTML =
-      "Item add successfully! Click on get my items button!";
-    document.getElementById("s-message").classList.add("success-message");
+  var reader = new FileReader();
+  reader.readAsDataURL(itemImg.files[0]);
+  reader.onload = async function () {
+    const img = reader.result; //base64encoded string
+    window.itemImage = img;
+    if (window.itemImage === "undefined") {
+      document.querySelector("#confirm-message").innerHTML =
+        "Click again to confirm";
+    } else {
+      document.querySelector("#confirm-message").innerHTML = " ";
+    }
+  };
+
+  if (window.itemImage) {
+    const resp = await fetch(window.itemPORT, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${window.currentUser.token}`,
+        "Content-Type": "application/json",
+        "User-Agent": "*",
+      },
+      body: JSON.stringify({
+        itemName,
+        itemDetails,
+        itemImg: window.itemImage,
+        itemType,
+        itemPrice,
+        itemUserName,
+        itemUserPhone,
+      }),
+    });
+    const data = await resp.json();
+    console.log(data);
+    if (data) {
+      document.getElementById("s-message").innerHTML =
+        "Item add successfully! Click on get my items button!";
+      document.getElementById("s-message").classList.add("success-message");
+    }
   }
 }
 

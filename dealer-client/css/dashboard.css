@@ -160,7 +160,7 @@ background-color: var(--orangeColor--);
 
 .success-message{
   background-color: rgba(172, 255, 47, 0.664);
-  color: rgb(212, 255, 212);
+  color: #f1f1f1;
   border: 1px solid green;
   padding: 1rem 3rem;
   margin-top: 1rem;
@@ -169,7 +169,15 @@ background-color: var(--orangeColor--);
 }
 
 
-
+#confirm-message{
+  background-color: darkcyan;
+  color: #f1f1f1;
+  border: 1px solid lightblue;
+  /* padding: 1rem 3rem; */
+  margin-top: 1rem;
+  border-radius: 5px;
+  text-align: center;
+}
 
 
 

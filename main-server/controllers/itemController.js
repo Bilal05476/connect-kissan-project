@@ -56,31 +56,7 @@ const setItem = asyncHandler(async (req, res) => {
 // @route  PUT api/item/:id
 // @access Private
 const updateItem = asyncHandler(async (req, res) => {
-  const item = await Item.findById(req.params.id);
-  if (!item) {
-    res.status(400);
-    throw new Error("Item not found");
-  }
-
-  //Validate User, So user can only update his item
-  const user = await User.findById(req.user.id);
-
-  if (!user) {
-    res.status(404);
-    throw new Error("User not found");
-  }
-
-  if (item.user.toString() !== user.id) {
-    res.status(401);
-    throw new Error("User not authorized");
-  }
-
-  // Update Item
-  const updatedItem = await Item.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-  });
-
-  res.status(200).json(updatedItem);
+  res.status(200);
 });
 
 // @desc   Delete Items

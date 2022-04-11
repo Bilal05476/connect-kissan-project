@@ -6,6 +6,7 @@ var currentUser = JSON.parse(localStorage.getItem("user")) || null;
 
 setTimeout(showPage, 1000);
 
+// @desc Page Redirection based on Authentication
 function showPage() {
   const dashboardRedirection =
     "http://127.0.0.1:5500/dealer-client/dashboard.html";
@@ -133,11 +134,9 @@ async function userRegister() {
 // @desc logout user
 if (document.getElementById("logoutBtn")) {
   document.getElementById("logoutBtn").onclick = function () {
-    // e.preventDefault();
-    if (window.currentUser) {
-      localStorage.clear();
-      showPage();
-    }
+    localStorage.clear();
+    window.currentUser = null;
+    showPage();
   };
 }
 

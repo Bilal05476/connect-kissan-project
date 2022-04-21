@@ -84,13 +84,13 @@ if (document.getElementById("setItem")) {
 }
 
 // @desc convert file into base64
-function getBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-  });
-}
+// function getBase64(file) {
+//   return new Promise((resolve, reject) => {
+//     const reader = new FileReader();
+//     reader.readAsDataURL(file);
+//     reader.onload = () => resolve(reader.result);
+//   });
+// }
 
 // @desc async function for setting item into database
 async function setItem() {

@@ -37,6 +37,17 @@
   text-transform: capitalize;
 }
 
+.user-info .image {
+  text-align: center;
+  margin-top: 1rem;
+}
+.user-info img{
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+
 .dashboard .left-board .item-form input,
 .dashboard .left-board .item-form textarea {
   padding: 1rem;
@@ -106,7 +117,29 @@ background-color: var(--orangeColor--);
 }
 .item-content{
   margin-top: 1rem;
+  height: 400px;
+  scroll-behavior: smooth;
+  overflow-y: auto;
 }
+
+/* width */
+.item-content::-webkit-scrollbar {
+  width: 0.3rem;
+}
+
+/* Track */
+.item-content::-webkit-scrollbar-track {
+  background: #000000d7;
+}
+
+/* Handle */
+.item-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(to top, var(--orangeColor--) 0%, #000000d7 100%);
+}
+.item-content::-webkit-scrollbar-thumb:hover{
+  background: var(--orangeColor--);
+}
+
 .item-content .item{
   margin: 1.4rem auto;
   border-radius: 5px;

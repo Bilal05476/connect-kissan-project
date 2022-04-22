@@ -22,6 +22,7 @@ const authenticateUser = asyncHandler(async (req, res) => {
       name: user.name,
       phone: user.phone,
       dealer: user.dealer,
+      userIcon: user.userIcon,
       token: token,
     });
   } else {
@@ -34,8 +35,8 @@ const authenticateUser = asyncHandler(async (req, res) => {
 // @route  POST api/user
 // @access Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, dealer, password, phone } = req.body;
-  if (!name || !email || !dealer || !password || !phone) {
+  const { name, email, dealer, password, phone, userIcon } = req.body;
+  if (!name || !email || !dealer || !password || !phone || !userIcon) {
     res.status(400);
     throw new Error("Please add all fields");
   }
@@ -58,6 +59,7 @@ const registerUser = asyncHandler(async (req, res) => {
     dealer,
     phone,
     password: hashedPassword,
+    userIcon
   });
 
   if (user) {
@@ -68,6 +70,7 @@ const registerUser = asyncHandler(async (req, res) => {
       email: user.email,
       dealer: user.dealer,
       phone: user.phone,
+      userIcon: user.userIcon,
       token: token,
     });
   } else {

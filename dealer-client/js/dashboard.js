@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector(".userEmail").innerHTML = currentUser.email;
     document.querySelector(".dealerShip").innerHTML = currentUser.dealer;
     document.querySelector(".phone").innerHTML = currentUser.phone;
+    document.querySelector(".icon").src = currentUser.userIcon;
   }
 });
 
@@ -59,7 +60,7 @@ const setupItems = (data) => {
               <span>${doc.itemDetails}</span>
             </p>
             <div>
-              <button>Delete</button>
+              <button onclick="deleteUserItem(${doc._id})">Delete</button>
             </div>
           </div>
         </div>`;

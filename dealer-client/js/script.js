@@ -3,6 +3,7 @@ var authPORT = "http://localhost:8080/api/user/login/";
 var registerPORT = "http://localhost:8080/api/user/";
 var contactPORT = "http://localhost:8080/contact-us";
 var currentUser = JSON.parse(localStorage.getItem("user")) || null;
+let userImage = "";
 
 setTimeout(showPage, 1000);
 
@@ -98,36 +99,52 @@ async function userRegister() {
   const email = document.getElementById("email").value;
   const phone = document.getElementById("phone").value;
   const password = document.getElementById("password").value;
+  const userImg = document.querySelector("#user-img");
 
-  const userInfo = { email, password, name, dealer, phone };
+  var reader = new FileReader();
+  reader.readAsDataURL(userImg.files[0]);
+  reader.onload = async function () {
+    const img = reader.result; //base64encoded string
+    window.userImage = img;
+  };
 
-  const response = await fetch(window.registerPORT, {
-    method: "POST",
-    headers: {
-      "User-Agent": "*",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(userInfo),
-  });
-  const data = await response.json();
+  const userInfo = {
+    email,
+    password,
+    name,
+    dealer,
+    phone,
+    userIcon: window.userImage,
+  };
 
-  if (
-    data.message === "User already exist" ||
-    data.message === "Please add all fields"
-  ) {
-    if (document.getElementById("signError")) {
-      document.getElementById("signError").innerHTML = data.message;
-      document.getElementById("signError").style.padding = "10px 30px";
-      document.getElementById("signError").style.border = "1px solid red";
+  if (window.userImage) {
+    const response = await fetch(window.registerPORT, {
+      method: "POST",
+      headers: {
+        "User-Agent": "*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userInfo),
+    });
+    const data = await response.json();
+    if (
+      data.message === "User already exist" ||
+      data.message === "Please add all fields"
+    ) {
+      if (document.getElementById("signError")) {
+        document.getElementById("signError").innerHTML = data.message;
+        document.getElementById("signError").style.padding = "10px 30px";
+        document.getElementById("signError").style.border = "1px solid red";
+      }
+    } else {
+      document.getElementById("signError").innerHTML = " ";
+      document.getElementById("signError").style.padding = "0px";
+      document.getElementById("signError").style.border = "none";
+      localStorage.setItem("user", JSON.stringify(data));
+      window.currentUser = data;
+      console.clear();
+      showPage();
     }
-  } else {
-    document.getElementById("signError").innerHTML = " ";
-    document.getElementById("signError").style.padding = "0px";
-    document.getElementById("signError").style.border = "none";
-    localStorage.setItem("user", JSON.stringify(data));
-    window.currentUser = data;
-    console.clear();
-    showPage();
   }
 }
 

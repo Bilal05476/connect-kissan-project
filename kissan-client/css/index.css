@@ -223,7 +223,7 @@ body {
   border-bottom-right-radius: 8px;
 }
 
-.item-content, .crop-content, .machine-content {
+.item-content, .crop-content, .machine-content, .pesticide-content {
   margin: 1rem 5rem;
   background-color: #000000a4;
   backdrop-filter: blur(10px);
@@ -235,7 +235,8 @@ body {
 
 .item-content .item, 
 .crop-content .item, 
-.machine-content .item {
+.machine-content .item, 
+.pesticide-content .item {
   margin: 1.4rem auto;
   display: flex;
   border-radius: 5px;

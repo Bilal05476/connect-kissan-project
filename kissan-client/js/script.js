@@ -3,6 +3,7 @@ var itemPORT = "http://localhost:8080/api/items/all";
 var contactPORT = "http://localhost:8080/contact-us";
 
 let itemsArray = [];
+let ITEMDATA = "";
 
 //toggle small screen navbar
 var labelId = document.getElementById("navbar-chckd");
@@ -102,6 +103,8 @@ if (cityGetBtn) {
 // DOMContentLoaded load all the items when client visit the website immediately
 document.addEventListener("DOMContentLoaded", function () {
   getUserItem();
+  
+  
 });
 
 async function getUserItem() {
@@ -113,38 +116,148 @@ async function getUserItem() {
   });
   const data = await response.json();
   setupItems(data);
+  setupMachineItem(data);
+  setupPesticideItem(data);
+  setupCropItem(data);
 }
 
+
 const setupItems = (data) => {
+  let item = "";
   if (data.length) {
-    let item = "";
     data.map((doc, index) => {
       const temp = `
-            <div class="item" key=${index}>
-              <img src=${doc.itemImg} />
-              <div>
-                <h4 class="i-name">Item Name: <span class="i-name">${doc.itemName}</span></h4>
-                <h4>Item Type: <span>${doc.itemType}</span></h4>
-                <h4>Item Price(Rs): <span>${doc.itemPrice}</span></h4>
-                <p>
-                  Item Description:
-                  <span>${doc.itemDetails}</span>
-                </p>
-                <div class="dealer-info">
-                  <h4>Dealer Name: <span>${doc.itemUserName}</span></h4>
-                  <h4>Dealer Contact: <span>${doc.itemUserPhone}</span></h4>
+              <div class="item" key=${index}>
+                <img src=${doc.itemImg} />
+                <div>
+                  <h4 class="i-name">Item Name: <span class="i-name">${doc.itemName}</span></h4>
+                  <h4>Item Type: <span>${doc.itemType}</span></h4>
+                  <h4>Item Price(Rs): <span>${doc.itemPrice}</span></h4>
+                  <p>
+                    Item Description:
+                    <span>${doc.itemDetails}</span>
+                  </p>
+                  <div class="dealer-info">
+                    <h4>Dealer Name: <span>${doc.itemUserName}</span></h4>
+                    <h4>Dealer Contact: <span>${doc.itemUserPhone}</span></h4>
+                  </div>
                 </div>
-              </div>
-            </div>`;
+              </div>`;
       item += temp;
     });
-
+  }
+  if (item !== "") {
     document.querySelector(".item-content").innerHTML = item;
   } else {
     document.querySelector(".item-content").innerHTML =
       '<div class="item"><h4 class="center-align">No Items to Show!</h4></div>';
   }
 };
+
+const setupMachineItem = (data) => {
+  let item = "";
+  if (data.length) {
+    data.map((doc, index) => {
+      if (doc.itemType === "machine") {
+        const temp = `
+              <div class="item" key=${index}>
+                <img src=${doc.itemImg} />
+                <div>
+                  <h4 class="i-name">Item Name: <span class="i-name">${doc.itemName}</span></h4>
+                  <h4>Item Type: <span>${doc.itemType}</span></h4>
+                  <h4>Item Price(Rs): <span>${doc.itemPrice}</span></h4>
+                  <p>
+                    Item Description:
+                    <span>${doc.itemDetails}</span>
+                  </p>
+                  <div class="dealer-info">
+                    <h4>Dealer Name: <span>${doc.itemUserName}</span></h4>
+                    <h4>Dealer Contact: <span>${doc.itemUserPhone}</span></h4>
+                  </div>
+                </div>
+              </div>`;
+        item += temp;
+      }
+    });
+  }
+
+  if (item !== "") {
+    document.querySelector(".machine-content").innerHTML = item;
+  } else {
+    document.querySelector(".machine-content").innerHTML =
+      '<div class="item"><h4 class="center-align">No Items to Show!</h4></div>';
+  }
+};
+
+const setupCropItem = (data) => {
+  let item = "";
+  if (data.length) {
+    data.map((doc, index) => {
+      if (doc.itemType === "crop") {
+        const temp = `
+              <div class="item" key=${index}>
+                <img src=${doc.itemImg} />
+                <div>
+                  <h4 class="i-name">Item Name: <span class="i-name">${doc.itemName}</span></h4>
+                  <h4>Item Type: <span>${doc.itemType}</span></h4>
+                  <h4>Item Price(Rs): <span>${doc.itemPrice}</span></h4>
+                  <p>
+                    Item Description:
+                    <span>${doc.itemDetails}</span>
+                  </p>
+                  <div class="dealer-info">
+                    <h4>Dealer Name: <span>${doc.itemUserName}</span></h4>
+                    <h4>Dealer Contact: <span>${doc.itemUserPhone}</span></h4>
+                  </div>
+                </div>
+              </div>`;
+        item += temp;
+      }
+    });
+  }
+  if (item !== "") {
+    document.querySelector(".crop-content").innerHTML = item;
+  } else {
+    document.querySelector(".crop-content").innerHTML =
+      '<div class="item"><h4 class="center-align">No Items to Show!</h4></div>';
+  }
+};
+
+const setupPesticideItem = (data) => {
+  let item = "";
+  if (!data.length) {
+    data.map((doc, index) => {
+      if (doc.itemType == "pesticide") {
+        const temp = `
+              <div class="item" key=${index}>
+                <img src=${doc.itemImg} />
+                <div>
+                  <h4 class="i-name">Item Name: <span class="i-name">${doc.itemName}</span></h4>
+                  <h4>Item Type: <span>${doc.itemType}</span></h4>
+                  <h4>Item Price(Rs): <span>${doc.itemPrice}</span></h4>
+                  <p>
+                    Item Description:
+                    <span>${doc.itemDetails}</span>
+                  </p>
+                  <div class="dealer-info">
+                    <h4>Dealer Name: <span>${doc.itemUserName}</span></h4>
+                    <h4>Dealer Contact: <span>${doc.itemUserPhone}</span></h4>
+                  </div>
+                </div>
+              </div>`;
+        item += temp;
+      }
+    });
+  }
+  if (item !== "") {
+    document.querySelector(".pesticide-content").innerHTML = item;
+  } else {
+    document.querySelector(".pesticide-content").innerHTML =
+      '<div class="item"><h4 class="center-align">No Items to Show!</h4></div>';
+  }
+};
+
+
 
 // @desc Contact Form Submission
 if (document.getElementById("contactForm")) {
@@ -186,4 +299,5 @@ async function userContact() {
     body: JSON.stringify(contactInfo),
   });
 }
+
 

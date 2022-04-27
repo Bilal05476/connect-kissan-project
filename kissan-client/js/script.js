@@ -3,7 +3,6 @@ var itemPORT = "http://localhost:8080/api/items/all";
 var contactPORT = "http://localhost:8080/contact-us";
 
 let itemsArray = [];
-let ITEMDATA = "";
 
 //toggle small screen navbar
 var labelId = document.getElementById("navbar-chckd");
@@ -103,8 +102,9 @@ if (cityGetBtn) {
 // DOMContentLoaded load all the items when client visit the website immediately
 document.addEventListener("DOMContentLoaded", function () {
   getUserItem();
-  
-  
+  getMachineItem();
+  getCropItem();
+  getPesticideItem();
 });
 
 async function getUserItem() {
@@ -114,13 +114,40 @@ async function getUserItem() {
       "Content-Type": "application/json",
     },
   });
-  const data = await response.json();
-  setupItems(data);
-  setupMachineItem(data);
-  setupPesticideItem(data);
-  setupCropItem(data);
+  const iData = await response.json();
+  setupItems(iData);
 }
 
+async function getMachineItem() {
+  const response = await fetch(window.itemPORT, {
+    headers: {
+      "User-Agent": "*",
+      "Content-Type": "application/json",
+    },
+  });
+  const iData = await response.json();
+  setupMachineItem(iData);
+}
+async function getCropItem() {
+  const response = await fetch(window.itemPORT, {
+    headers: {
+      "User-Agent": "*",
+      "Content-Type": "application/json",
+    },
+  });
+  const iData = await response.json();
+  setupCropItem(iData);
+}
+async function getPesticideItem() {
+  const response = await fetch(window.itemPORT, {
+    headers: {
+      "User-Agent": "*",
+      "Content-Type": "application/json",
+    },
+  });
+  const iData = await response.json();
+  setupPesticideItem(iData);
+}
 
 const setupItems = (data) => {
   let item = "";
@@ -257,8 +284,6 @@ const setupPesticideItem = (data) => {
   }
 };
 
-
-
 // @desc Contact Form Submission
 if (document.getElementById("contactForm")) {
   document.getElementById("contactForm").onsubmit = function (e) {
@@ -299,5 +324,3 @@ async function userContact() {
     body: JSON.stringify(contactInfo),
   });
 }
-
-

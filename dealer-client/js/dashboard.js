@@ -47,7 +47,7 @@ const setupItems = (data) => {
   if (data.length) {
     let item = "";
     data.map((doc, index) => {
-      // const id = doc._id;
+      const id = doc._id;
       const temp = `
         <div class="item" key=${index}>
           <img src=${doc.itemImg} />
@@ -60,7 +60,7 @@ const setupItems = (data) => {
               <span>${doc.itemDetails}</span>
             </p>
             <div>
-              <button onclick="deleteUserItem(${doc._id})">Delete</button>
+              <button onclick="deleteUserItem('${id}')">Delete</button>
             </div>
           </div>
         </div>`;
@@ -84,14 +84,6 @@ if (document.getElementById("setItem")) {
   };
 }
 
-// @desc convert file into base64
-// function getBase64(file) {
-//   return new Promise((resolve, reject) => {
-//     const reader = new FileReader();
-//     reader.readAsDataURL(file);
-//     reader.onload = () => resolve(reader.result);
-//   });
-// }
 
 // @desc async function for setting item into database
 async function setItem() {
@@ -138,8 +130,9 @@ async function setItem() {
     const data = await resp.json();
     if (data) {
       document.getElementById("s-message").innerHTML =
-        "Item add successfully! Click on get my items button!";
+        "Item add successfully!";
       document.getElementById("s-message").classList.add("success-message");
+      getUserItem();
     }
   }
 }
@@ -155,5 +148,5 @@ async function deleteUserItem(id) {
       "Content-Type": "application/json",
     },
   });
-  console.log(id);
+  getUserItem();
 }

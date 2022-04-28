@@ -220,7 +220,7 @@ const setupCropItem = (data) => {
   let item = "";
   if (data.length) {
     data.map((doc, index) => {
-      if (doc.itemType === "crop") {
+      if (doc.itemType === "crops") {
         const temp = `
               <div class="item" key=${index}>
                 <img src=${doc.itemImg} />

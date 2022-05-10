@@ -276,6 +276,34 @@ body {
   margin-left: 1rem;
 }
 
+.lib-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 230px;
+  background-color: #000000a4;
+  padding-bottom: 300px;
+  /* Add the blur effect */
+  backdrop-filter: blur(3px);
+}
+.lib-content a {
+  background-color: var(--orangeColor--);
+  color: #fff;
+  text-decoration: none;
+  margin: 10px;
+  padding: 10px 30px;
+  font-weight: bold;
+  border-radius: 10px;
+  border: 1px solid var(--orangeColor--);
+}
+.lib-content a:hover {
+  background-color: rgba(255, 255, 255, 0.87);
+  color: var(--orangeColor--);
+}
+
+
+
+
 
 @media (max-width: 782px) {
   .navbar-menu {

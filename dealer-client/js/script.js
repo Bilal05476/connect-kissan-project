@@ -10,9 +10,9 @@ setTimeout(showPage, 1000);
 // @desc Page Redirection based on Authentication
 function showPage() {
   const dashboardRedirection =
-    "http://127.0.0.1:5500/dealer-client/dashboard.html";
-  const loginHref = "http://127.0.0.1:5500/dealer-client/login.html";
-  const registerHref = "http://127.0.0.1:5500/dealer-client/register.html";
+    "https://dealer-client-web.netlify.app/dashboard.html";
+  const loginHref = "https://dealer-client-web.netlify.app/login.html";
+  const registerHref = "https://dealer-client-web.netlify.app/register.html";
   if (window.currentUser !== null) {
     if (
       window.location.href === loginHref ||

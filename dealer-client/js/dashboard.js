@@ -84,7 +84,6 @@ if (document.getElementById("setItem")) {
   };
 }
 
-
 // @desc async function for setting item into database
 async function setItem() {
   const itemName = document.getElementById("item-name").value;
@@ -129,8 +128,7 @@ async function setItem() {
     });
     const data = await resp.json();
     if (data) {
-      document.getElementById("s-message").innerHTML =
-        "Item add successfully!";
+      document.getElementById("s-message").innerHTML = "Item add successfully!";
       document.getElementById("s-message").classList.add("success-message");
       getUserItem();
     }

@@ -17,7 +17,8 @@ body {
   align-items: center;
   justify-content: center;
   padding: 230px;
-  background-color: #000000a4;
+  background-color: #000000e0;
+
   padding-bottom: 300px;
   /* Add the blur effect */
   backdrop-filter: blur(3px);
@@ -261,7 +262,6 @@ body {
 #Pass:checked ~ .passLabel.show {
   display: none;
 } */
-
 
 .small-nav-drawer.hide {
   display: none;

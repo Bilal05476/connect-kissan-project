@@ -21,7 +21,8 @@ body {
 
 .item-content {
   margin: 1rem 5rem;
-  background-color: #000000a4;
+  background-color: #000000e0;
+
   backdrop-filter: blur(10px);
   padding: 2rem;
   padding-left: 0;

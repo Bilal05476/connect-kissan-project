@@ -1,5 +1,5 @@
 .dashboard {
-  background-color: #000000d7;
+  background-color: #000000e0;
   color: #fff;
   display: flex;
   align-items: flex-start;
@@ -19,21 +19,21 @@
   padding: 2rem;
   border-radius: 5px;
   /* text-transform: uppercase; */
-  letter-spacing: .01rem;
+  letter-spacing: 0.01rem;
   background-color: #0000007a;
 }
 .dashboard .left-board .item-form {
   display: flex;
   flex-direction: column;
 }
-.left-board .item-form h2{
+.left-board .item-form h2 {
   background-color: var(--orangeColor--);
   text-align: center;
   border-radius: 5px;
   padding: 1rem;
 }
 
-.user-info strong{
+.user-info strong {
   text-transform: capitalize;
 }
 
@@ -41,12 +41,11 @@
   text-align: center;
   margin-top: 1rem;
 }
-.user-info img{
+.user-info img {
   width: 170px;
   height: 170px;
   border-radius: 50%;
 }
-
 
 .dashboard .left-board .item-form input,
 .dashboard .left-board .item-form textarea {
@@ -70,11 +69,12 @@
   margin: 2rem auto;
   /* margin-bottom: 3rem; */
 }
-.dashboard .left-board .item-form .add-item, .item-button {
+.dashboard .left-board .item-form .add-item,
+.item-button {
   margin-top: 1rem;
   background-color: transparent;
   padding: 1rem;
-  border: 1px solid var(--orangeColor--) ;
+  border: 1px solid var(--orangeColor--);
   outline: none !important;
   cursor: pointer;
   color: #fff;
@@ -84,8 +84,8 @@
 }
 
 .dashboard .left-board .item-form .add-item:hover,
-.item-button:hover{
-background-color: var(--orangeColor--);
+.item-button:hover {
+  background-color: var(--orangeColor--);
 }
 #logoutBtn {
   text-decoration: none;
@@ -98,13 +98,13 @@ background-color: var(--orangeColor--);
 .dashboard .right-board {
   width: 40%;
 }
-.dashboard .user-items{
+.dashboard .user-items {
   margin-top: 2rem;
   padding: 2rem;
   background-color: #0000007a;
   border-radius: 5px;
 }
-.dashboard .user-items h2{
+.dashboard .user-items h2 {
   background-color: var(--orangeColor--);
   padding: 1.2rem;
   border-radius: 5px;
@@ -115,7 +115,7 @@ background-color: var(--orangeColor--);
   align-items: center;
   justify-content: center;
 }
-.item-content{
+.item-content {
   margin-top: 1rem;
   height: 400px;
   scroll-behavior: smooth;
@@ -136,35 +136,35 @@ background-color: var(--orangeColor--);
 .item-content::-webkit-scrollbar-thumb {
   background: linear-gradient(to top, var(--orangeColor--) 0%, #000000d7 100%);
 }
-.item-content::-webkit-scrollbar-thumb:hover{
+.item-content::-webkit-scrollbar-thumb:hover {
   background: var(--orangeColor--);
 }
 
-.item-content .item{
+.item-content .item {
   margin: 1.4rem auto;
   border-radius: 5px;
   padding: 1.2rem;
   background-color: #0000007a;
   font-size: 1rem;
 }
-.item-content .item h4, 
-.item-content .item p{
-  margin: .5rem auto;
-  letter-spacing: .01rem;
+.item-content .item h4,
+.item-content .item p {
+  margin: 0.5rem auto;
+  letter-spacing: 0.01rem;
 }
-.item-content .item button{
+.item-content .item button {
   background-color: transparent;
   border: none;
   outline: none;
   border-radius: 5px;
   letter-spacing: 0.1rem;
-  padding: .5rem 1.5rem;
+  padding: 0.5rem 1.5rem;
   width: 100%;
   color: transparent;
   cursor: pointer;
-  transition: .5s ease-in-out;
+  transition: 0.5s ease-in-out;
 }
-.item-content .item:hover button{
+.item-content .item:hover button {
   background-color: crimson;
   color: #f1f1f1;
 }
@@ -178,8 +178,8 @@ background-color: var(--orangeColor--);
 }
 .item h4,
 .item p {
-  margin: .5rem auto;
-  letter-spacing: .01rem;
+  margin: 0.5rem auto;
+  letter-spacing: 0.01rem;
   text-align: justify;
   color: #f1f1f1;
   font-weight: 900;
@@ -191,7 +191,7 @@ background-color: var(--orangeColor--);
   color: #f1f1f1;
 }
 
-.success-message{
+.success-message {
   background-color: rgba(172, 255, 47, 0.664);
   color: #f1f1f1;
   border: 1px solid green;
@@ -201,8 +201,7 @@ background-color: var(--orangeColor--);
   text-align: center;
 }
 
-
-#confirm-message{
+#confirm-message {
   background-color: darkcyan;
   color: #f1f1f1;
   border: 1px solid lightblue;
@@ -211,8 +210,6 @@ background-color: var(--orangeColor--);
   border-radius: 5px;
   text-align: center;
 }
-
-
 
 @media (max-width: 782px) {
   .dashboard {
@@ -230,7 +227,7 @@ background-color: var(--orangeColor--);
     width: 80%;
     margin-bottom: 2rem;
   }
-  #logoutBtn{
-    margin-left: .6rem;
+  #logoutBtn {
+    margin-left: 0.6rem;
   }
 }

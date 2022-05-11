@@ -11,7 +11,10 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
-
+.source span {
+  font-weight: bold;
+  color: var(--orangeColor--);
+}
 .admin-content {
   display: flex;
   align-items: center;
@@ -188,12 +191,11 @@ body {
   margin-right: 0.5rem;
   margin-top: 0.5rem;
 }
-.search-container{
+.search-container {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 40px;
-
 }
 .search-container input[type="text"] {
   padding: 10px;
@@ -223,7 +225,10 @@ body {
   border-bottom-right-radius: 8px;
 }
 
-.item-content, .crop-content, .machine-content, .pesticide-content {
+.item-content,
+.crop-content,
+.machine-content,
+.pesticide-content {
   margin: 1rem 5rem;
   background-color: #000000a4;
   backdrop-filter: blur(10px);
@@ -233,9 +238,9 @@ body {
   border-radius: 5px;
 }
 
-.item-content .item, 
-.crop-content .item, 
-.machine-content .item, 
+.item-content .item,
+.crop-content .item,
+.machine-content .item,
 .pesticide-content .item {
   margin: 1.4rem auto;
   display: flex;
@@ -245,8 +250,8 @@ body {
   background-color: #000000a4;
   font-size: 1rem;
 }
-.item img{
-  margin-right: .9rem;
+.item img {
+  margin-right: 0.9rem;
   border-radius: 5px;
   width: 230px;
   height: 200px;
@@ -254,14 +259,14 @@ body {
 
 .item h4,
 .item p {
-  margin: .5rem auto;
-  letter-spacing: .01rem;
+  margin: 0.5rem auto;
+  letter-spacing: 0.01rem;
   text-align: justify;
   color: #f1f1f1;
   font-weight: 900;
   color: var(--orangeColor--);
 }
-.item span{
+.item span {
   font-weight: 300;
   color: #f1f1f1;
 }
@@ -271,7 +276,7 @@ body {
   align-items: flex-start;
   justify-content: flex-end;
 }
-.item .dealer-info h4{
+.item .dealer-info h4 {
   margin: 0;
   margin-left: 1rem;
 }
@@ -300,10 +305,6 @@ body {
   background-color: rgba(255, 255, 255, 0.87);
   color: var(--orangeColor--);
 }
-
-
-
-
 
 @media (max-width: 782px) {
   .navbar-menu {
@@ -366,7 +367,7 @@ body {
   .search-container {
     width: 100%;
   }
-  
+
   .search-container input[type="text"] {
     width: 77%;
   }
@@ -374,7 +375,7 @@ body {
   .item-content {
     margin: 1rem 2rem;
   }
-  
+
   .item-content .item {
     margin: 1.4rem auto;
     border-radius: 5px;
@@ -387,14 +388,13 @@ body {
   .item .dealer-info {
     flex-direction: column;
   }
-  .item .dealer-info h4{
+  .item .dealer-info h4 {
     margin-left: auto;
   }
   .item img {
-    margin-right: .9rem;
+    margin-right: 0.9rem;
     border-radius: 5px;
     width: 100%;
     height: 230px;
   }
-
 }

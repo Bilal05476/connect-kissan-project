@@ -93,7 +93,7 @@
   text-align: center;
   border-radius: 5px;
   cursor: pointer;
-  margin-left: 15rem;
+  margin-left: 38rem;
 }
 .dashboard .right-board {
   width: 40%;
@@ -229,5 +229,29 @@
   }
   #logoutBtn {
     margin-left: 0.6rem;
+  }
+}
+
+@media (max-width: 1328px) {
+  #logoutBtn {
+    margin-left: 35rem;
+  }
+}
+
+@media (max-width: 1280px) {
+  #logoutBtn {
+    margin-left: 32rem;
+  }
+}
+
+@media (max-width: 1232px) {
+  #logoutBtn {
+    margin-left: 28rem;
+  }
+}
+
+@media (max-width: 1168px) {
+  #logoutBtn {
+    margin-left: 25rem;
   }
 }

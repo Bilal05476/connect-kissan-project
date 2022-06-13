@@ -165,24 +165,6 @@ body {
   border-bottom-right-radius: 8px;
 }
 
-/*toggle authentication form*/
-/* .check-box {
-  display: none;
-}
-.authenticate-box.sign-up {
-  display: none;
-}
-.check-box:checked ~ .authenticate-box.login {
-  display: none;
-}
-.check-box:checked ~ .authenticate-box.login {
-  display: none;
-}
-.check-box:checked ~ .authenticate-box.sign-up {
-  display: block;
-} */
-/*toggle authentication form end*/
-
 .authenticate-box {
   display: flex;
   flex-direction: column !important;

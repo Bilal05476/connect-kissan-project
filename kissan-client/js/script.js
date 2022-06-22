@@ -1,6 +1,7 @@
 // @desc Global Variables
 var itemPORT = "http://localhost:8080/api/items/all";
 var contactPORT = "http://localhost:8080/contact-us";
+var allItemsPORT = "http://127.0.0.1:5500/kissan-client/all-items.html";
 
 let itemsArray = [];
 
@@ -324,3 +325,35 @@ async function userContact() {
     body: JSON.stringify(contactInfo),
   });
 }
+
+let modalClose = document.getElementById("modalClose");
+let modalContainer = document.getElementById("modal_container");
+let modalInput = document.getElementById("modalInput");
+let modalInputCheck = document.getElementById("modalInputCheck");
+let err = document.getElementById("err");
+
+if (allItemsPORT) {
+  modalContainer.classList.add("show");
+}
+
+modalClose.addEventListener("click", () => {
+  modalContainer.classList.remove("show");
+});
+
+modalInputCheck.addEventListener("click", () => {
+  if (modalInput.value.length > 11) {
+    err.innerHTML = "Should be max eleven numbers";
+    err.classList.remove("success");
+    err.classList.add("fail");
+  } else if (modalInput.value.length < 11) {
+    err.innerHTML = "Should be min eleven numbers";
+    err.classList.remove("success");
+    err.classList.add("fail");
+  } else {
+    modalClose.classList.add("show");
+    modalInputCheck.classList.add("show");
+    err.innerHTML = "Great, now proceed to site details";
+    err.classList.add("success");
+    err.classList.remove("fail");
+  }
+});

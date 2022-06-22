@@ -42,7 +42,9 @@
           </div>
         </div>
         <a href="contact.html">Contact</a>
-        <a href="https://dealer-client-web.netlify.app/" target="blank">Join as Dealer</a>
+        <a href="https://dealer-client-web.netlify.app/" target="blank"
+          >Join as Dealer</a
+        >
       </div>
     </nav>
     <nav class="small-nav-drawer" id="small-nav">
@@ -71,8 +73,44 @@
         </div>
       </div>
       <a href="contact.html">Contact</a>
-      <a href="https://dealer-client-web.netlify.app/" target="blank">Join as Dealer</a>
+      <a href="https://dealer-client-web.netlify.app/" target="blank"
+        >Join as Dealer</a
+      >
     </nav>
+    <div class="modal-container" id="modal_container">
+      <div class="modal">
+        <h1>CONNECT KISSAN</h1>
+        <p>
+          Provide your details before accessing the site details!
+          <br />
+          Your information is secure, we can't sold your personal data with any
+          anyone else!
+        </p>
+
+        <span id="err"></span>
+        <br />
+        <input
+          required
+          type="text"
+          id="modalInput"
+          placeholder="Phone Number"
+          style="
+            text-align: center;
+            font-size: 1rem;
+            padding: 0.5rem 1.2rem;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+            background-color: transparent;
+            border: 1px solid var(--orangeColor--);
+          "
+        />
+
+        <button id="modalInputCheck">Add</button>
+        <button id="modalClose">Proceed</button>
+      </div>
+    </div>
+
     <div class="item-content"></div>
     <script src="js/script.js"></script>
   </body>
